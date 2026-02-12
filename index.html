@@ -3,16 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Version Control: Our Story – For Heenu</title>
+<title>From Swipe to Soul – Director's Cut</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;600&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 
 <style>
 
 :root{
---dark:#0d0f14;
 --accent:#e8c07d;
---village:#f6efe7;
+--dark:#0e0f14;
 }
 
 *{margin:0;padding:0;box-sizing:border-box;}
@@ -24,117 +23,59 @@ color:white;
 overflow:hidden;
 }
 
-/* INTRO CINEMATIC */
+/* Cinematic Letterbox */
 
-.intro{
+.letterbox{
 position:fixed;
 width:100%;
-height:100vh;
-display:flex;
-align-items:center;
-justify-content:center;
+height:10vh;
 background:black;
-z-index:10;
-flex-direction:column;
-animation:fadeOut 4s forwards 4s;
+z-index:100;
+transition:2s;
 }
 
-@keyframes fadeOut{
-to{opacity:0;visibility:hidden;}
-}
+.top{top:0;}
+.bottom{bottom:0;}
 
-.intro h1{
-font-family:'Playfair Display',serif;
-font-size:clamp(32px,6vw,64px);
-letter-spacing:2px;
-}
+/* Background */
 
-/* BACKGROUND TRANSITION */
-
-.background{
+.bg{
 position:fixed;
 width:100%;
 height:100vh;
-background:linear-gradient(135deg,#141e30,#243b55);
-transition:3s;
-z-index:-1;
-}
-
-.background.village{
 background:url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=2070&auto=format&fit=crop') center/cover no-repeat;
+transition:5s ease;
 }
 
-/* GAME CONTAINER */
+.bg.night{
+filter:brightness(0.3) saturate(0.6);
+}
 
-.gameContainer{
+/* Center Content */
+
+.center{
 position:absolute;
 top:50%;
 left:50%;
 transform:translate(-50%,-50%);
 text-align:center;
-max-width:900px;
+max-width:800px;
 width:90%;
 }
 
-h2{
-margin-bottom:40px;
-font-weight:300;
+/* Titles */
+
+h1{
+font-family:'Playfair Display',serif;
+font-size:clamp(32px,6vw,64px);
+margin-bottom:20px;
 }
-
-/* NODE NETWORK */
-
-.nodes{
-display:flex;
-flex-wrap:wrap;
-justify-content:center;
-gap:30px;
-}
-
-.node{
-width:140px;
-height:140px;
-border-radius:50%;
-background:#1f1f2a;
-display:flex;
-align-items:center;
-justify-content:center;
-text-align:center;
-cursor:pointer;
-transition:0.4s;
-border:2px solid transparent;
-}
-
-.node:hover{
-border:2px solid var(--accent);
-}
-
-.node.active{
-background:var(--accent);
-color:black;
-}
-
-/* CONNECTING LINE */
-
-.line{
-position:absolute;
-height:4px;
-background:var(--accent);
-transform-origin:left;
-animation:growLine 1s forwards;
-}
-
-@keyframes growLine{
-from{width:0;}
-to{width:200px;}
-}
-
-/* FINAL MESSAGE */
 
 .final{
 display:none;
-margin-top:60px;
 font-family:'Great Vibes',cursive;
 font-size:48px;
+margin-top:30px;
 color:var(--accent);
 animation:glow 2s infinite alternate;
 }
@@ -144,47 +85,74 @@ from{text-shadow:0 0 10px rgba(232,192,125,0.4);}
 to{text-shadow:0 0 40px rgba(232,192,125,0.9);}
 }
 
-/* LILIES */
+/* Tea */
 
-.lily{
-position:fixed;
-font-size:28px;
-animation:fall linear forwards;
+.teacup{
+font-size:70px;
+position:relative;
+margin-top:30px;
 }
 
-@keyframes fall{
-to{transform:translateY(110vh) rotate(360deg);opacity:0;}
+.steam{
+position:absolute;
+top:-30px;
+left:50%;
+width:12px;
+height:30px;
+background:rgba(255,255,255,0.7);
+border-radius:50%;
+filter:blur(8px);
+transform:translateX(-50%);
+animation:steam 3s infinite;
+}
+
+@keyframes steam{
+0%{opacity:0;transform:translate(-50%,10px);}
+50%{opacity:1;}
+100%{opacity:0;transform:translate(-50%,-40px);}
+}
+
+/* Stars */
+
+.star{
+position:fixed;
+width:3px;
+height:3px;
+background:white;
+border-radius:50%;
+opacity:0;
+animation:twinkle 3s infinite alternate;
+}
+
+@keyframes twinkle{
+from{opacity:0.2;}
+to{opacity:1;}
 }
 
 </style>
 </head>
 <body>
 
-<div class="intro">
-<h1>Version Control</h1>
-<p>Deploying Fate...</p>
-</div>
+<div class="letterbox top"></div>
+<div class="letterbox bottom"></div>
 
-<div class="background" id="bg"></div>
+<div class="bg" id="bg"></div>
 
-<div class="gameContainer">
+<audio id="music">
+<source src="https://cdn.pixabay.com/download/audio/2023/03/07/audio_7baf8c9d4a.mp3?filename=romantic-orchestra-141568.mp3">
+</audio>
 
-<h2>Reconnect Our Timeline</h2>
+<div class="center">
 
-<div class="nodes" id="nodes">
-<div class="node">Swipe</div>
-<div class="node">Voice Notes</div>
-<div class="node">Tea Meet</div>
-<div class="node">Eye Drops Night</div>
-<div class="node">Separation</div>
-<div class="node">Reunion</div>
-</div>
+<h1 id="title">From Swipe to Soul</h1>
+<p>Tap anywhere to begin the story.</p>
+
+<div class="teacup">☕<div class="steam" id="steam"></div></div>
 
 <div class="final" id="final">
-Heenu ❤️  
-Some stories don't restart.  
-They resume.
-<br><br>
+Heenu ❤️<br>
+Some stories don’t restart…<br>
+They resume.<br><br>
 Happy Valentine’s Day.
 </div>
 
@@ -192,52 +160,60 @@ Happy Valentine’s Day.
 
 <script>
 
-const correctOrder=[
-"Swipe",
-"Voice Notes",
-"Tea Meet",
-"Eye Drops Night",
-"Separation",
-"Reunion"
+const bg=document.getElementById("bg");
+const music=document.getElementById("music");
+const steam=document.getElementById("steam");
+
+let started=false;
+
+document.body.addEventListener("click",()=>{
+if(started) return;
+started=true;
+
+music.play();
+
+/* Timed transitions */
+setTimeout(()=>{
+bg.classList.add("night");
+createStars();
+},8000);
+
+setTimeout(()=>{
+document.getElementById("final").style.display="block";
+},15000);
+});
+
+/* Interactive steam */
+document.addEventListener("mousemove",e=>{
+let x=(e.clientX/window.innerWidth-0.5)*20;
+steam.style.transform=`translate(${x}px,-40px)`;
+});
+
+/* Mobile gesture */
+document.addEventListener("touchmove",e=>{
+let touch=e.touches[0];
+let x=(touch.clientX/window.innerWidth-0.5)*20;
+steam.style.transform=`translate(${x}px,-40px)`;
+});
+
+/* Star constellation shaped like lily */
+function createStars(){
+const positions=[
+[50,20],[45,25],[55,25],
+[40,35],[60,35],
+[45,45],[55,45],
+[50,55]
 ];
 
-let current=0;
-
-const nodes=document.querySelectorAll('.node');
-
-nodes.forEach(node=>{
-node.addEventListener('click',()=>{
-if(node.innerText===correctOrder[current]){
-node.classList.add('active');
-current++;
-
-if(current===correctOrder.length){
-completeExperience();
-}
-
-}else{
-node.style.animation="shake 0.4s";
-setTimeout(()=>node.style.animation="",400);
-}
+positions.forEach(pos=>{
+let star=document.createElement("div");
+star.className="star";
+star.style.left=pos[0]+"vw";
+star.style.top=pos[1]+"vh";
+star.style.animationDuration=(2+Math.random()*2)+"s";
+star.style.opacity=1;
+document.body.appendChild(star);
 });
-});
-
-function completeExperience(){
-document.getElementById("bg").classList.add("village");
-document.getElementById("final").style.display="block";
-bloomLilies();
-}
-
-function bloomLilies(){
-for(let i=0;i<40;i++){
-let lily=document.createElement("div");
-lily.className="lily";
-lily.innerHTML="🌸";
-lily.style.left=Math.random()*100+"vw";
-lily.style.animationDuration=(5+Math.random()*3)+"s";
-document.body.appendChild(lily);
-setTimeout(()=>lily.remove(),9000);
-}
 }
 
 </script>
