@@ -1,276 +1,240 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>From Swipe to Soul – For Heenu</title>
+<title>Version Control: Our Story – For Heenu</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;600&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 
 <style>
 
 :root{
---bg-dark:#0f0f14;
+--dark:#0d0f14;
 --accent:#e8c07d;
---soft:#f6efe7;
---text:#f5f5f5;
+--village:#f6efe7;
 }
 
 *{margin:0;padding:0;box-sizing:border-box;}
 
 body{
 font-family:'Inter',sans-serif;
-background:var(--bg-dark);
-color:var(--text);
-overflow-x:hidden;
-scroll-behavior:smooth;
+background:var(--dark);
+color:white;
+overflow:hidden;
 }
 
-/* GLOBAL SECTION STYLE */
+/* INTRO CINEMATIC */
 
-section{
-min-height:100vh;
+.intro{
+position:fixed;
+width:100%;
+height:100vh;
 display:flex;
 align-items:center;
 justify-content:center;
-padding:10vw;
-text-align:center;
-position:relative;
+background:black;
+z-index:10;
+flex-direction:column;
+animation:fadeOut 4s forwards 4s;
 }
 
-/* INTRO */
-
-.intro{
-background:#000;
+@keyframes fadeOut{
+to{opacity:0;visibility:hidden;}
 }
 
-.title{
+.intro h1{
 font-family:'Playfair Display',serif;
 font-size:clamp(32px,6vw,64px);
 letter-spacing:2px;
-opacity:0;
-animation:fadeIn 3s forwards;
 }
 
-.subtitle{
-margin-top:20px;
-font-size:18px;
-opacity:0.7;
-}
+/* BACKGROUND TRANSITION */
 
-/* SWIPE ERA */
-
-.swipe{
-background:linear-gradient(135deg,#141e30,#243b55);
-}
-
-.swipe p{
-max-width:700px;
-line-height:1.8;
-}
-
-/* INSTA PHASE */
-
-.insta{
-background:linear-gradient(135deg,#833ab4,#fd1d1d,#fcb045);
-background-size:400% 400%;
-animation:gradientMove 10s ease infinite;
-}
-
-@keyframes gradientMove{
-0%{background-position:0% 50%}
-50%{background-position:100% 50%}
-100%{background-position:0% 50%}
-}
-
-/* TEA MEETING */
-
-.tea{
-background:url('https://images.unsplash.com/photo-1498654896293-37aacf113fd9?q=80&w=2070&auto=format&fit=crop') center/cover fixed;
-}
-
-.overlay{
-position:absolute;
+.background{
+position:fixed;
 width:100%;
-height:100%;
-background:rgba(0,0,0,0.6);
-top:0;left:0;
+height:100vh;
+background:linear-gradient(135deg,#141e30,#243b55);
+transition:3s;
+z-index:-1;
 }
 
-.content{
-position:relative;
-z-index:2;
-max-width:800px;
+.background.village{
+background:url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=2070&auto=format&fit=crop') center/cover no-repeat;
+}
+
+/* GAME CONTAINER */
+
+.gameContainer{
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+text-align:center;
+max-width:900px;
+width:90%;
+}
+
+h2{
+margin-bottom:40px;
+font-weight:300;
+}
+
+/* NODE NETWORK */
+
+.nodes{
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+gap:30px;
+}
+
+.node{
+width:140px;
+height:140px;
+border-radius:50%;
+background:#1f1f2a;
+display:flex;
+align-items:center;
+justify-content:center;
+text-align:center;
+cursor:pointer;
+transition:0.4s;
+border:2px solid transparent;
+}
+
+.node:hover{
+border:2px solid var(--accent);
+}
+
+.node.active{
+background:var(--accent);
+color:black;
+}
+
+/* CONNECTING LINE */
+
+.line{
+position:absolute;
+height:4px;
+background:var(--accent);
+transform-origin:left;
+animation:growLine 1s forwards;
+}
+
+@keyframes growLine{
+from{width:0;}
+to{width:200px;}
+}
+
+/* FINAL MESSAGE */
+
+.final{
+display:none;
+margin-top:60px;
+font-family:'Great Vibes',cursive;
+font-size:48px;
+color:var(--accent);
+animation:glow 2s infinite alternate;
+}
+
+@keyframes glow{
+from{text-shadow:0 0 10px rgba(232,192,125,0.4);}
+to{text-shadow:0 0 40px rgba(232,192,125,0.9);}
 }
 
 /* LILIES */
 
 .lily{
 position:fixed;
-font-size:24px;
+font-size:28px;
 animation:fall linear forwards;
 }
+
 @keyframes fall{
 to{transform:translateY(110vh) rotate(360deg);opacity:0;}
-}
-
-/* SEPARATION */
-
-.silence{
-background:#0a0a0d;
-color:#777;
-font-style:italic;
-}
-
-/* FATE */
-
-.fate{
-background:url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=2070&auto=format&fit=crop') center/cover fixed;
-}
-
-.fate::before{
-content:"";
-position:absolute;
-width:100%;
-height:100%;
-background:rgba(0,0,0,0.6);
-}
-
-/* FINAL */
-
-.final{
-background:#000;
-flex-direction:column;
-}
-
-.final h1{
-font-family:'Great Vibes',cursive;
-font-size:clamp(48px,8vw,80px);
-color:var(--accent);
-margin-bottom:20px;
-}
-
-.button{
-padding:14px 28px;
-background:var(--accent);
-border:none;
-border-radius:30px;
-font-weight:600;
-cursor:pointer;
-transition:0.3s;
-}
-.button:hover{
-transform:scale(1.08);
-}
-
-@keyframes fadeIn{
-to{opacity:1;}
 }
 
 </style>
 </head>
 <body>
 
-<audio autoplay loop>
-<source src="https://cdn.pixabay.com/download/audio/2023/03/07/audio_7baf8c9d4a.mp3?filename=romantic-orchestra-141568.mp3">
-</audio>
-
-<section class="intro">
-<div>
-<div class="title">From Swipe to Soul</div>
-<div class="subtitle">For Heenu</div>
+<div class="intro">
+<h1>Version Control</h1>
+<p>Deploying Fate...</p>
 </div>
-</section>
 
-<section class="swipe">
-<div>
-<p>
-We met on a screen.  
-A swipe. A spark.  
-Just two profiles in a digital world.  
-But somehow... it felt older than the internet itself.
-</p>
+<div class="background" id="bg"></div>
+
+<div class="gameContainer">
+
+<h2>Reconnect Our Timeline</h2>
+
+<div class="nodes" id="nodes">
+<div class="node">Swipe</div>
+<div class="node">Voice Notes</div>
+<div class="node">Tea Meet</div>
+<div class="node">Eye Drops Night</div>
+<div class="node">Separation</div>
+<div class="node">Reunion</div>
 </div>
-</section>
 
-<section class="insta">
-<div>
-<p>
-From chats to voice notes.  
-From late night calls to that magical meet.  
-From pixels… to presence.  
-From strangers… to something deeper.
-</p>
-</div>
-</section>
-
-<section class="tea">
-<div class="overlay"></div>
-<div class="content">
-<p>
-Tea.  
-Silence.  
-Heartbeats louder than words.  
-You, with your lilies and your quiet strength.  
-Me, pretending not to fall.
-</p>
-</div>
-</section>
-
-<section class="swipe">
-<div>
-<p>
-The eye drops.  
-Your head resting on my thigh.  
-That wasn’t just care.  
-That was the moment I understood love.
-</p>
-</div>
-</section>
-
-<section class="silence">
-<div>
-<p>
-And then…  
-Life pulled us apart.
-</p>
-</div>
-</section>
-
-<section class="fate">
-<div class="content">
-<p>
-But some stories don’t end.  
-They pause.  
-And fate… remembers.  
-It brought us back — not by chance,  
-but by design.
-</p>
-</div>
-</section>
-
-<section class="final">
-<h1>Heenu</h1>
-<p>
-You are not my coincidence.  
-You are my continuity.  
-My village mornings.  
-My lifetime echo.  
-My forever tea partner.
-</p>
+<div class="final" id="final">
+Heenu ❤️  
+Some stories don't restart.  
+They resume.
 <br><br>
-<button class="button" onclick="bloomLilies()">Happy Valentine’s Day ❤️</button>
-</section>
+Happy Valentine’s Day.
+</div>
+
+</div>
 
 <script>
 
+const correctOrder=[
+"Swipe",
+"Voice Notes",
+"Tea Meet",
+"Eye Drops Night",
+"Separation",
+"Reunion"
+];
+
+let current=0;
+
+const nodes=document.querySelectorAll('.node');
+
+nodes.forEach(node=>{
+node.addEventListener('click',()=>{
+if(node.innerText===correctOrder[current]){
+node.classList.add('active');
+current++;
+
+if(current===correctOrder.length){
+completeExperience();
+}
+
+}else{
+node.style.animation="shake 0.4s";
+setTimeout(()=>node.style.animation="",400);
+}
+});
+});
+
+function completeExperience(){
+document.getElementById("bg").classList.add("village");
+document.getElementById("final").style.display="block";
+bloomLilies();
+}
+
 function bloomLilies(){
-for(let i=0;i<30;i++){
+for(let i=0;i<40;i++){
 let lily=document.createElement("div");
 lily.className="lily";
 lily.innerHTML="🌸";
 lily.style.left=Math.random()*100+"vw";
-lily.style.animationDuration=(5+Math.random()*4)+"s";
+lily.style.animationDuration=(5+Math.random()*3)+"s";
 document.body.appendChild(lily);
 setTimeout(()=>lily.remove(),9000);
 }
