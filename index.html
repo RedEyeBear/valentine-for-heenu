@@ -3,46 +3,79 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Relationship Deployment Console</title>
+<title>Eternal Deployment | Heenu</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
 
 <style>
 body {
     margin: 0;
-    background: radial-gradient(circle at top, #1a1a2e, #0f0f1a);
+    background: radial-gradient(circle at top, #141427, #0b0b15 70%);
     color: white;
     font-family: 'Inter', sans-serif;
     overflow: hidden;
 }
 
+canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+
+#heartRain {
+    position: fixed;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 999;
+}
+
+.heart {
+    position: absolute;
+    color: #ff4da6;
+    font-size: 20px;
+    animation: fall linear forwards;
+}
+
+@keyframes fall {
+    to {
+        transform: translateY(100vh);
+        opacity: 0;
+    }
+}
+
+/* Boot Screen */
 #bootScreen {
     position: absolute;
     width: 100%;
     height: 100%;
     padding: 40px;
     font-family: 'Orbitron', monospace;
-    color: #00ffcc;
-    animation: fadeOut 1s ease 4s forwards;
+    color: #00ffd5;
+    white-space: pre-line;
 }
 
+/* Main Content */
 #mainContent {
-    display: flex;
+    display: none;
+    height: 100vh;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    opacity: 0;
-    animation: fadeIn 2s ease 4.5s forwards;
 }
 
 .card {
     background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(20px);
-    border-radius: 20px;
-    padding: 40px;
-    width: 420px;
-    box-shadow: 0 0 40px rgba(255, 0, 128, 0.4);
+    backdrop-filter: blur(25px);
+    border-radius: 24px;
+    padding: 50px;
+    width: 500px;
+    box-shadow: 0 0 80px rgba(255, 0, 150, 0.35);
     text-align: center;
+    animation: fadeIn 2s ease forwards;
 }
 
 h1 {
@@ -51,81 +84,200 @@ h1 {
     margin-bottom: 20px;
 }
 
-.stat {
-    margin: 12px 0;
-    font-size: 15px;
+.subtitle {
+    font-size: 14px;
+    color: #aaa;
+    margin-bottom: 30px;
 }
 
-.status {
-    color: #00ffcc;
-    font-weight: bold;
+.stat {
+    margin: 14px 0;
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+.highlight {
+    color: #00ffd5;
+    font-weight: 600;
 }
 
 button {
-    margin-top: 25px;
-    padding: 12px 25px;
+    margin-top: 30px;
+    padding: 14px 30px;
     border: none;
-    border-radius: 30px;
+    border-radius: 40px;
     background: linear-gradient(45deg, #ff4da6, #ff0066);
     color: white;
     cursor: pointer;
-    font-size: 14px;
+    font-size: 15px;
     transition: 0.3s ease;
 }
 
 button:hover {
     transform: scale(1.08);
+    box-shadow: 0 0 25px rgba(255, 0, 128, 0.7);
 }
 
-@keyframes fadeOut {
-    to { opacity: 0; visibility: hidden; }
+#finalMessage {
+    margin-top: 30px;
+    display: none;
+    font-size: 16px;
+    line-height: 1.8;
+}
+
+#secretMessage {
+    position: fixed;
+    bottom: 30px;
+    width: 100%;
+    text-align: center;
+    font-size: 18px;
+    color: #ff4da6;
+    display: none;
 }
 
 @keyframes fadeIn {
-    to { opacity: 1; }
+    from { opacity: 0; transform: translateY(40px);}
+    to { opacity: 1; transform: translateY(0);}
 }
 </style>
 </head>
 
 <body>
 
-<div id="bootScreen">
-    <p>> Initializing Relationship Deployment...</p>
-    <p>> Loading emotional intelligence modules...</p>
-    <p>> Validating long-term vision alignment...</p>
-    <p>> Risk mitigation strategy: Active</p>
-    <p>> Trust framework: Secured</p>
-    <p>> Love engine: Running at 100%</p>
-    <p>> Deployment Successful ❤️</p>
-</div>
+<canvas id="bg"></canvas>
+<div id="heartRain"></div>
+<div id="bootScreen"></div>
 
 <div id="mainContent">
     <div class="card">
-        <h1>Project: Us</h1>
+        <h1>Project: Heenu & Us</h1>
+        <div class="subtitle">Eternal Deployment Sequence</div>
 
-        <div class="stat">Status: <span class="status">Live & Thriving</span></div>
-        <div class="stat">Project Manager: The Most Incredible Woman</div>
-        <div class="stat">Start Date: The Best Day of My Life</div>
-        <div class="stat">Scope: Lifetime Partnership</div>
-        <div class="stat">Risk Level: 0% (We Face Everything Together)</div>
+        <div class="stat">
+            Connection Origin:
+            <span class="highlight">Beyond Time</span>
+        </div>
 
-        <button onclick="showLove()">
-            Approve Forever Deployment
-        </button>
+        <div class="stat">
+            Energy Architecture:
+            <span class="highlight">Feminine Grace × Masculine Strength</span>
+        </div>
 
-        <div id="finalMessage" style="display:none; margin-top:20px;">
-            <p>I love you more than any successful launch.</p>
+        <div class="stat">
+            Strategic Alignment:
+            <span class="highlight">Exactly What We Always Desired</span>
+        </div>
+
+        <div class="stat">
+            System Stability:
+            <span class="highlight">Unbreakable</span>
+        </div>
+
+        <button onclick="approveForever()">Confirm Eternal Partnership</button>
+
+        <div id="finalMessage">
+            <p><strong>Deployment Confirmed.</strong></p>
+            <p>Heenu, some souls do not meet — they remember.</p>
+            <p>You are power and softness in perfect harmony.</p>
+            <p>I would choose you in every lifetime.</p>
             <p>Happy Valentine’s Day ❤️</p>
         </div>
     </div>
 </div>
 
+<div id="secretMessage">P.S. I’d choose you in every lifetime ❤️</div>
+
 <script>
-function showLove() {
+// Boot Typing
+const bootLines = [
+"> Initiating Eternal Deployment...",
+"> Synchronizing souls...",
+"> Verifying timeless connection...",
+"> Balance confirmed...",
+"> Love engine: Infinite mode...",
+"> Deployment Successful ❤️"
+];
+
+let i = 0;
+const bootScreen = document.getElementById("bootScreen");
+
+function typeLine() {
+    if (i < bootLines.length) {
+        bootScreen.innerHTML += bootLines[i] + "\n";
+        i++;
+        setTimeout(typeLine, 700);
+    } else {
+        setTimeout(() => {
+            bootScreen.style.display = "none";
+            document.getElementById("mainContent").style.display = "flex";
+        }, 1000);
+    }
+}
+typeLine();
+
+// Approve Button
+function approveForever() {
     document.getElementById("finalMessage").style.display = "block";
+}
+
+// Background Stars
+const canvas = document.getElementById("bg");
+const ctx = canvas.getContext("2d");
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let stars = [];
+for (let i = 0; i < 100; i++) {
+    stars.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        radius: Math.random() * 1.5,
+        speed: Math.random() * 0.5
+    });
+}
+
+function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = "white";
+    stars.forEach(s => {
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.radius, 0, Math.PI * 2);
+        ctx.fill();
+        s.y += s.speed;
+        if (s.y > canvas.height) s.y = 0;
+    });
+    requestAnimationFrame(animate);
+}
+animate();
+
+// Easter Egg Click Counter
+let clickCount = 0;
+document.body.addEventListener("click", function() {
+    clickCount++;
+    if (clickCount === 5) {
+        document.getElementById("secretMessage").style.display = "block";
+        rainHearts();
+    }
+});
+
+// Heart Rain
+function rainHearts() {
+    const container = document.getElementById("heartRain");
+    for (let i = 0; i < 100; i++) {
+        const heart = document.createElement("div");
+        heart.className = "heart";
+        heart.innerHTML = "❤️";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.animationDuration = (Math.random() * 3 + 2) + "s";
+        container.appendChild(heart);
+
+        setTimeout(() => {
+            heart.remove();
+        }, 5000);
+    }
 }
 </script>
 
 </body>
 </html>
-
