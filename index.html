@@ -3,22 +3,106 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Heenu – From Swipe to Soul</title>
+<title>Production Deployment Console</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;600&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Great+Vibes&family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
 
 <style>
-
-/* 🌌 Twilight Purple-Blue-Yellow Background */
 body{
 margin:0;
-overflow:hidden;
 font-family:'Inter',sans-serif;
+overflow:hidden;
+}
+
+/* ---------------- PAGE 1 ---------------- */
+#deploymentPage{
+background:#0f172a;
+color:#e2e8f0;
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+text-align:center;
+padding:20px;
+transition:opacity 1s ease;
+}
+
+.console-box{
+background:#111827;
+padding:40px;
+border-radius:12px;
+width:90%;
+max-width:600px;
+box-shadow:0 0 40px rgba(0,0,0,0.5);
+}
+
+.console-title{
+font-size:22px;
+margin-bottom:20px;
+font-weight:600;
+}
+
+.status{
+text-align:left;
+font-size:14px;
+line-height:1.8;
+opacity:0.9;
+min-height:120px;
+}
+
+.progress-container{
+margin-top:20px;
+width:100%;
+background:#1f2937;
+border-radius:6px;
+overflow:hidden;
+display:none;
+}
+
+.progress-bar{
+height:10px;
+width:0%;
+background:#22c55e;
+transition:width 0.3s ease;
+}
+
+.progress-text{
+margin-top:10px;
+font-size:13px;
+opacity:0.8;
+}
+
+.deploy-btn{
+margin-top:30px;
+padding:12px 25px;
+background:#2563eb;
+border:none;
+color:white;
+border-radius:6px;
+cursor:pointer;
+font-weight:600;
+transition:0.3s;
+}
+
+.deploy-btn:hover{
+background:#1d4ed8;
+}
+
+/* ---------------- PAGE 2 ---------------- */
+
+#romanticPage{
+display:none;
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:100%;
 background:linear-gradient(-45deg,#3a0ca3,#4361ee,#7209b7,#f9c74f);
 background-size:400% 400%;
 animation:gradientMove 18s ease infinite;
 color:#fff;
-transition:background 2s ease;
+overflow:hidden;
 }
 
 @keyframes gradientMove{
@@ -27,17 +111,6 @@ transition:background 2s ease;
 100%{background-position:0% 50%}
 }
 
-/* 🌫 Vignette */
-body::after{
-content:"";
-position:fixed;
-width:100%;
-height:100%;
-pointer-events:none;
-box-shadow:inset 0 0 160px rgba(0,0,0,0.5);
-}
-
-/* 🌙 Moon */
 .moon{
 position:fixed;
 top:10%;
@@ -49,7 +122,6 @@ border-radius:50%;
 opacity:0.8;
 }
 
-/* ✨ Sparkles */
 .sparkle{
 position:fixed;
 width:3px;
@@ -64,7 +136,6 @@ from{transform:translateY(100vh);}
 to{transform:translateY(-10vh);}
 }
 
-/* 💐 Card */
 .card{
 position:absolute;
 top:50%;
@@ -78,11 +149,6 @@ width:90%;
 max-width:650px;
 text-align:center;
 box-shadow:0 20px 80px rgba(0,0,0,0.6);
-transition:transform 0.2s ease;
-}
-
-body:hover .card{
-transform:translate(-50%,-50%) scale(1.02);
 }
 
 .name{
@@ -95,14 +161,12 @@ margin-bottom:10px;
 font-family:'Playfair Display',serif;
 margin-bottom:20px;
 font-size:clamp(18px,3vw,24px);
-opacity:0.95;
 }
 
 .story{
 font-family:'Playfair Display',serif;
 line-height:1.8;
 font-size:16px;
-opacity:0.95;
 margin-bottom:25px;
 }
 
@@ -124,12 +188,10 @@ button:hover{transform:scale(1.05);}
 #proposal{display:none;margin-top:20px;font-size:18px;}
 #finalMessage{display:none;font-size:20px;margin-top:20px;font-family:'Playfair Display',serif;line-height:1.8;}
 
-/* 💛 Golden YES transformation */
-body.golden{
+body.golden #romanticPage{
 background:linear-gradient(-45deg,#ffd700,#ffb703,#ffdf00,#ffe066);
 }
 
-/* ❤️ Falling hearts */
 .heart{
 position:fixed;
 top:-20px;
@@ -140,57 +202,50 @@ animation:fall linear forwards;
 to{transform:translateY(110vh);opacity:0;}
 }
 
-/* 📱 Mobile */
-@media(max-width:480px){
-.card{padding:30px;}
-button{font-size:14px;}
-}
-
 </style>
 </head>
-
 <body>
 
+<!-- ---------------- PAGE 1 ---------------- -->
+<div id="deploymentPage">
+
+<div class="console-box">
+<div class="console-title">Production Deployment Console</div>
+
+<div class="status" id="statusLogs">
+✔ Build Version: 2.0.14<br>
+✔ Dependency Check: Passed<br>
+✔ Security Scan: Clean<br>
+✔ Performance Audit: Optimized<br>
+✔ Final Validation: Ready<br>
+</div>
+
+<div class="progress-container" id="progressContainer">
+<div class="progress-bar" id="progressBar"></div>
+</div>
+<div class="progress-text" id="progressText"></div>
+
+<button class="deploy-btn" id="deployBtn" onclick="startDeployment()">Proceed to Production</button>
+
+</div>
+</div>
+
+<!-- ---------------- PAGE 2 ---------------- -->
+<div id="romanticPage">
 <div class="moon"></div>
 
-<!-- ☕ Tea ambience -->
-<audio autoplay loop>
-<source src="https://cdn.pixabay.com/download/audio/2022/05/16/audio_1e0b3e04e4.mp3?filename=coffee-shop-ambience-112191.mp3">
-</audio>
-
-<!-- 🎐 Wind chime -->
-<audio id="chime">
-<source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_9a46c4d3a7.mp3?filename=wind-chime-110955.mp3">
-</audio>
-
-<!-- 🎶 Romantic swell -->
-<audio id="romanticSwell">
-<source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_5b6f2eaa3f.mp3?filename=romantic-piano-110964.mp3">
-</audio>
-
 <div class="card">
-
 <div style="font-size:60px;">💐</div>
-
 <div class="name">Heenu</div>
-
 <div class="subtitle">From a Swipe… to a Soul.</div>
 
 <div class="story">
 We met on a screen… just another swipe in the dark.<br><br>
-
 But something about you didn’t feel digital.<br>
 It felt destined.<br><br>
-
-From late night texts…<br>
-to that voice note that stayed in my heart…<br>
-to tea shared between two strangers<br>
-with hearts quietly racing…<br><br>
-
-From the hug I almost gave,<br>
-to the night you trusted me with your quiet,<br>
-somewhere between pixels and presence…<br>
-you became my peace.
+From late night texts… to that voice note that stayed in my heart…<br>
+to tea shared between two strangers with hearts quietly racing…<br><br>
+Somewhere between pixels and presence… you became my peace.
 </div>
 
 <button onclick="propose()">Walk Every Lifetime With Me</button>
@@ -201,45 +256,58 @@ Will you walk every lifetime with me? ❤️<br><br>
 </div>
 
 <div id="finalMessage">
-That night…<br><br>
-
-When you laid your head on my lap<br>
-and trusted me with your silence,<br>
-I understood something.<br><br>
-
-Love isn’t fireworks.<br>
-It’s presence.<br>
-It’s care.<br>
-It’s choosing someone gently.<br><br>
-
-From swipe to soul…<br>
-you didn’t just enter my life.<br>
-You became my always.<br><br>
-
-I would choose you —<br>
-in every lifetime. ❤️
+From swipe to soul… you became my always.<br>
+I would choose you — in every lifetime. ❤️
 </div>
-
+</div>
 </div>
 
 <script>
 
+/* Fake Deployment Progress */
+function startDeployment(){
+document.getElementById("deployBtn").disabled=true;
+document.getElementById("progressContainer").style.display="block";
+
+let progress=0;
+let interval=setInterval(()=>{
+progress+=5;
+document.getElementById("progressBar").style.width=progress+"%";
+document.getElementById("progressText").innerText="Deploying... "+progress+"%";
+
+if(progress>=100){
+clearInterval(interval);
+document.getElementById("progressText").innerText="Deployment Successful ✓";
+setTimeout(launch,1000);
+}
+},150);
+}
+
+function launch(){
+document.getElementById("deploymentPage").style.opacity="0";
+setTimeout(()=>{
+document.getElementById("deploymentPage").style.display="none";
+document.getElementById("romanticPage").style.display="block";
+generateSparkles();
+},1000);
+}
+
 /* Sparkles */
+function generateSparkles(){
 for(let i=0;i<60;i++){
 let s=document.createElement("div");
 s.className="sparkle";
 s.style.left=Math.random()*100+"vw";
 s.style.animationDuration=(4+Math.random()*4)+"s";
-document.body.appendChild(s);
+document.getElementById("romanticPage").appendChild(s);
+}
 }
 
-/* Proposal */
+/* Proposal + Hearts */
 function propose(){
 document.getElementById("proposal").style.display="block";
-document.getElementById("chime").play();
 }
 
-/* Escaping YES button */
 const yesBtn=document.getElementById("yesBtn");
 let movable=true;
 
@@ -248,7 +316,6 @@ if(movable){
 yesBtn.style.position="absolute";
 yesBtn.style.left=Math.random()*70+"%";
 yesBtn.style.top=Math.random()*70+"%";
-leaveHeart();
 }
 }
 
@@ -260,27 +327,14 @@ movable=false;
 yesBtn.style.position="static";
 },7000);
 
-function leaveHeart(){
-const h=document.createElement("div");
-h.className="heart";
-h.innerHTML="❤️";
-h.style.left=Math.random()*100+"vw";
-h.style.animationDuration="3s";
-document.body.appendChild(h);
-setTimeout(()=>h.remove(),3000);
-}
-
-/* YES Click */
 yesBtn.addEventListener("click",()=>{
 if(!movable){
 document.body.classList.add("golden");
-document.getElementById("romanticSwell").play();
 document.getElementById("finalMessage").style.display="block";
 startForeverHearts();
 }
 });
 
-/* Infinite heart rain */
 function startForeverHearts(){
 setInterval(()=>{
 const heart=document.createElement("div");
@@ -288,7 +342,7 @@ heart.className="heart";
 heart.innerHTML=Math.random()>0.3?"❤️":"💏";
 heart.style.left=Math.random()*100+"vw";
 heart.style.animationDuration=(2+Math.random()*3)+"s";
-document.body.appendChild(heart);
+document.getElementById("romanticPage").appendChild(heart);
 setTimeout(()=>heart.remove(),5000);
 },250);
 }
