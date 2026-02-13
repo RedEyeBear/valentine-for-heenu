@@ -143,7 +143,13 @@ transition:0.5s;
 .name{
 font-family:'Great Vibes',cursive;
 font-size:clamp(42px,6vw,72px);
+margin-bottom:10px;
+}
+
+.subtitle{
+font-family:'Playfair Display',serif;
 margin-bottom:20px;
+font-size:clamp(18px,3vw,24px);
 }
 
 .story{
@@ -170,6 +176,7 @@ transition:0.3s;
 button:hover{transform:scale(1.05);}
 
 #proposal{display:none;margin-top:20px;font-size:18px;}
+
 #finalMessage{
 display:none;
 font-size:20px;
@@ -245,10 +252,11 @@ Risk Register:<br>
 
 <div style="font-size:60px;">💐</div>
 <div class="name">Heenu</div>
+<div class="subtitle">From a Swipe… to My Safest Place.</div>
 
 <div class="story" id="storyText"></div>
 
-<button onclick="propose()">Continue</button>
+<button id="continueBtn" onclick="propose()" disabled>Continue</button>
 
 <div id="proposal">
 If love is about choosing…<br><br>
@@ -298,15 +306,16 @@ window.scrollTo(0,0);
 startTypingStory();
 }
 
-/* Typewriter Effect */
+/* TYPEWRITER FUNCTION */
 function typeWriter(element, text, speed, callback){
 let i = 0;
+element.innerHTML = "";
 function typing(){
 if(i < text.length){
 element.innerHTML += text.charAt(i);
 i++;
 setTimeout(typing, speed);
-} else if(callback){
+}else if(callback){
 callback();
 }
 }
@@ -331,7 +340,18 @@ And somehow… you brought that same calm into my life.
 Somewhere between planning sprints and planning weekends…
 you became my constant.`;
 
-typeWriter(document.getElementById("storyText"), storyContent, 35);
+const continueBtn = document.getElementById("continueBtn");
+continueBtn.style.opacity = "0.6";
+
+typeWriter(
+document.getElementById("storyText"),
+storyContent,
+35,
+() => {
+continueBtn.disabled = false;
+continueBtn.style.opacity = "1";
+}
+);
 }
 
 /* Sparkles */
@@ -356,6 +376,7 @@ const yesBtn=document.getElementById("yesBtn");
 
 yesBtn.addEventListener("click",()=>{
 document.body.classList.add("golden");
+
 const finalText = `You are not just my always.
 You are my choice.
 My calm.
@@ -368,8 +389,11 @@ No sunset clause.
 No exit strategy.
 Just us. ❤️`;
 
-typeWriter(document.getElementById("finalMessage"), finalText, 40);
-document.getElementById("finalMessage").style.display="block";
+const finalMessage = document.getElementById("finalMessage");
+finalMessage.style.display="block";
+
+typeWriter(finalMessage, finalText, 40);
+
 yesBtn.innerText="Approved ✔";
 startForeverHearts();
 });
