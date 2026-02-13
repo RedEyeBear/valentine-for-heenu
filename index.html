@@ -8,22 +8,22 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Great+Vibes&family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
 
 <style>
+
+/* ---------- GLOBAL ---------- */
 body{
 margin:0;
 font-family:'Inter',sans-serif;
-overflow:hidden;
+transition:background 1.5s ease;
 }
 
-/* ---------------- PAGE 1 ---------------- */
+/* ---------- PAGE 1: DEPLOYMENT ---------- */
 #deploymentPage{
 background:#0f172a;
 color:#e2e8f0;
-height:100vh;
+min-height:100vh;
 display:flex;
 justify-content:center;
 align-items:center;
-flex-direction:column;
-text-align:center;
 padding:20px;
 transition:opacity 1s ease;
 }
@@ -32,9 +32,10 @@ transition:opacity 1s ease;
 background:#111827;
 padding:40px;
 border-radius:12px;
-width:90%;
+width:100%;
 max-width:600px;
 box-shadow:0 0 40px rgba(0,0,0,0.5);
+text-align:center;
 }
 
 .console-title{
@@ -48,11 +49,10 @@ text-align:left;
 font-size:14px;
 line-height:1.8;
 opacity:0.9;
-min-height:120px;
+margin-bottom:20px;
 }
 
 .progress-container{
-margin-top:20px;
 width:100%;
 background:#1f2937;
 border-radius:6px;
@@ -74,7 +74,7 @@ opacity:0.8;
 }
 
 .deploy-btn{
-margin-top:30px;
+margin-top:25px;
 padding:12px 25px;
 background:#2563eb;
 border:none;
@@ -89,20 +89,16 @@ transition:0.3s;
 background:#1d4ed8;
 }
 
-/* ---------------- PAGE 2 ---------------- */
-
+/* ---------- PAGE 2: ROMANTIC ---------- */
 #romanticPage{
 display:none;
-position:absolute;
-top:0;
-left:0;
-width:100%;
-height:100%;
+min-height:100vh;
 background:linear-gradient(-45deg,#3a0ca3,#4361ee,#7209b7,#f9c74f);
 background-size:400% 400%;
 animation:gradientMove 18s ease infinite;
 color:#fff;
-overflow:hidden;
+position:relative;
+padding:60px 20px;
 }
 
 @keyframes gradientMove{
@@ -112,9 +108,9 @@ overflow:hidden;
 }
 
 .moon{
-position:fixed;
-top:10%;
-right:10%;
+position:absolute;
+top:60px;
+right:60px;
 width:120px;
 height:120px;
 background:radial-gradient(circle,#fff,#ddd 60%,transparent 70%);
@@ -122,8 +118,9 @@ border-radius:50%;
 opacity:0.8;
 }
 
+/* Sparkles */
 .sparkle{
-position:fixed;
+position:absolute;
 width:3px;
 height:3px;
 background:white;
@@ -137,16 +134,12 @@ to{transform:translateY(-10vh);}
 }
 
 .card{
-position:absolute;
-top:50%;
-left:50%;
-transform:translate(-50%,-50%);
+margin:0 auto;
 background:rgba(20,10,40,0.78);
 backdrop-filter:blur(25px);
 padding:40px;
 border-radius:30px;
-width:90%;
-max-width:650px;
+max-width:700px;
 text-align:center;
 box-shadow:0 20px 80px rgba(0,0,0,0.6);
 }
@@ -167,7 +160,7 @@ font-size:clamp(18px,3vw,24px);
 font-family:'Playfair Display',serif;
 line-height:1.8;
 font-size:16px;
-margin-bottom:25px;
+margin-bottom:30px;
 }
 
 button{
@@ -186,12 +179,13 @@ position:relative;
 button:hover{transform:scale(1.05);}
 
 #proposal{display:none;margin-top:20px;font-size:18px;}
-#finalMessage{display:none;font-size:20px;margin-top:20px;font-family:'Playfair Display',serif;line-height:1.8;}
+#finalMessage{display:none;font-size:20px;margin-top:30px;font-family:'Playfair Display',serif;line-height:1.8;}
 
 body.golden #romanticPage{
 background:linear-gradient(-45deg,#ffd700,#ffb703,#ffdf00,#ffe066);
 }
 
+/* Hearts */
 .heart{
 position:fixed;
 top:-20px;
@@ -206,13 +200,12 @@ to{transform:translateY(110vh);opacity:0;}
 </head>
 <body>
 
-<!-- ---------------- PAGE 1 ---------------- -->
+<!-- ---------- PAGE 1 ---------- -->
 <div id="deploymentPage">
-
 <div class="console-box">
 <div class="console-title">Production Deployment Console</div>
 
-<div class="status" id="statusLogs">
+<div class="status">
 ✔ Build Version: 2.0.14<br>
 ✔ Dependency Check: Passed<br>
 ✔ Security Scan: Clean<br>
@@ -225,46 +218,57 @@ to{transform:translateY(110vh);opacity:0;}
 </div>
 <div class="progress-text" id="progressText"></div>
 
-<button class="deploy-btn" id="deployBtn" onclick="startDeployment()">Proceed to Production</button>
-
+<button class="deploy-btn" id="deployBtn" onclick="startDeployment()">Deploy to Production</button>
 </div>
 </div>
 
-<!-- ---------------- PAGE 2 ---------------- -->
+<!-- ---------- PAGE 2 ---------- -->
 <div id="romanticPage">
 <div class="moon"></div>
 
 <div class="card">
+
 <div style="font-size:60px;">💐</div>
+
 <div class="name">Heenu</div>
 <div class="subtitle">From a Swipe… to a Soul.</div>
 
 <div class="story">
 We met on a screen… just another swipe in the dark.<br><br>
+
 But something about you didn’t feel digital.<br>
 It felt destined.<br><br>
+
 From late night texts… to that voice note that stayed in my heart…<br>
 to tea shared between two strangers with hearts quietly racing…<br><br>
+
 Somewhere between pixels and presence… you became my peace.
 </div>
 
-<button onclick="propose()">Walk Every Lifetime With Me</button>
+<button onclick="propose()">Continue</button>
 
 <div id="proposal">
-Will you walk every lifetime with me? ❤️<br><br>
-<button id="yesBtn">Yes</button>
+And if love is about choosing…<br><br>
+<button id="yesBtn">I choose you</button>
 </div>
 
 <div id="finalMessage">
-From swipe to soul… you became my always.<br>
-I would choose you — in every lifetime. ❤️
+That night when you trusted me with your silence…<br><br>
+I understood something.<br><br>
+Love isn’t loud.<br>
+It’s presence.<br>
+It’s care.<br>
+It’s choosing someone gently.<br><br>
+You became my always.<br>
+And I would choose you — in every lifetime. ❤️
 </div>
+
 </div>
 </div>
 
 <script>
 
-/* Fake Deployment Progress */
+/* Deployment Progress */
 function startDeployment(){
 document.getElementById("deployBtn").disabled=true;
 document.getElementById("progressContainer").style.display="block";
@@ -278,9 +282,9 @@ document.getElementById("progressText").innerText="Deploying... "+progress+"%";
 if(progress>=100){
 clearInterval(interval);
 document.getElementById("progressText").innerText="Deployment Successful ✓";
-setTimeout(launch,1000);
+setTimeout(launch,800);
 }
-},150);
+},120);
 }
 
 function launch(){
@@ -289,7 +293,8 @@ setTimeout(()=>{
 document.getElementById("deploymentPage").style.display="none";
 document.getElementById("romanticPage").style.display="block";
 generateSparkles();
-},1000);
+window.scrollTo(0,0);
+},800);
 }
 
 /* Sparkles */
@@ -298,24 +303,26 @@ for(let i=0;i<60;i++){
 let s=document.createElement("div");
 s.className="sparkle";
 s.style.left=Math.random()*100+"vw";
+s.style.top=Math.random()*100+"vh";
 s.style.animationDuration=(4+Math.random()*4)+"s";
 document.getElementById("romanticPage").appendChild(s);
 }
 }
 
-/* Proposal + Hearts */
+/* Proposal */
 function propose(){
 document.getElementById("proposal").style.display="block";
 }
 
+/* YES button playful */
 const yesBtn=document.getElementById("yesBtn");
 let movable=true;
 
 function moveButton(){
 if(movable){
 yesBtn.style.position="absolute";
-yesBtn.style.left=Math.random()*70+"%";
-yesBtn.style.top=Math.random()*70+"%";
+yesBtn.style.left=Math.random()*60+"%";
+yesBtn.style.top=Math.random()*60+"%";
 }
 }
 
@@ -335,6 +342,7 @@ startForeverHearts();
 }
 });
 
+/* Infinite hearts */
 function startForeverHearts(){
 setInterval(()=>{
 const heart=document.createElement("div");
@@ -342,7 +350,7 @@ heart.className="heart";
 heart.innerHTML=Math.random()>0.3?"❤️":"💏";
 heart.style.left=Math.random()*100+"vw";
 heart.style.animationDuration=(2+Math.random()*3)+"s";
-document.getElementById("romanticPage").appendChild(heart);
+document.body.appendChild(heart);
 setTimeout(()=>heart.remove(),5000);
 },250);
 }
