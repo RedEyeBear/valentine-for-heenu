@@ -3,21 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Production Deployment Console</title>
+<title>Platform Deployment Dashboard</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Great+Vibes&family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
 
 <style>
-
-/* ---------- GLOBAL ---------- */
 body{
 margin:0;
 font-family:'Inter',sans-serif;
-transition:background 1.5s ease;
 }
 
-/* ---------- PAGE 1: DEPLOYMENT ---------- */
-#deploymentPage{
+/* ---------------- PAGE 1 ---------------- */
+#page1{
 background:#0f172a;
 color:#e2e8f0;
 min-height:100vh;
@@ -25,55 +22,23 @@ display:flex;
 justify-content:center;
 align-items:center;
 padding:20px;
-transition:opacity 1s ease;
 }
 
-.console-box{
+.dashboard{
 background:#111827;
 padding:40px;
 border-radius:12px;
 width:100%;
-max-width:600px;
-box-shadow:0 0 40px rgba(0,0,0,0.5);
+max-width:650px;
+box-shadow:0 0 40px rgba(0,0,0,0.6);
 text-align:center;
 }
 
-.console-title{
-font-size:22px;
-margin-bottom:20px;
-font-weight:600;
-}
-
-.status{
-text-align:left;
-font-size:14px;
-line-height:1.8;
-opacity:0.9;
+.dashboard h2{
 margin-bottom:20px;
 }
 
-.progress-container{
-width:100%;
-background:#1f2937;
-border-radius:6px;
-overflow:hidden;
-display:none;
-}
-
-.progress-bar{
-height:10px;
-width:0%;
-background:#22c55e;
-transition:width 0.3s ease;
-}
-
-.progress-text{
-margin-top:10px;
-font-size:13px;
-opacity:0.8;
-}
-
-.deploy-btn{
+.qc-btn{
 margin-top:25px;
 padding:12px 25px;
 background:#2563eb;
@@ -85,11 +50,50 @@ font-weight:600;
 transition:0.3s;
 }
 
-.deploy-btn:hover{
+.qc-btn:hover{
 background:#1d4ed8;
 }
 
-/* ---------- PAGE 2: ROMANTIC ---------- */
+/* ---------------- PAGE 2 LOADING ---------------- */
+#loadingPage{
+display:none;
+background:#0b1220;
+color:#cbd5e1;
+min-height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+}
+
+.loader-box{
+width:90%;
+max-width:500px;
+}
+
+.progress-container{
+width:100%;
+height:12px;
+background:#1f2937;
+border-radius:8px;
+overflow:hidden;
+margin-top:20px;
+}
+
+.progress-bar{
+height:100%;
+width:0%;
+background:#22c55e;
+transition:width 0.4s ease;
+}
+
+.loading-text{
+margin-top:15px;
+font-size:14px;
+opacity:0.8;
+}
+
+/* ---------------- PAGE 3 ROMANTIC ---------------- */
 #romanticPage{
 display:none;
 min-height:100vh;
@@ -97,8 +101,8 @@ background:linear-gradient(-45deg,#3a0ca3,#4361ee,#7209b7,#f9c74f);
 background-size:400% 400%;
 animation:gradientMove 18s ease infinite;
 color:#fff;
-position:relative;
 padding:60px 20px;
+position:relative;
 }
 
 @keyframes gradientMove{
@@ -118,7 +122,6 @@ border-radius:50%;
 opacity:0.8;
 }
 
-/* Sparkles */
 .sparkle{
 position:absolute;
 width:3px;
@@ -128,6 +131,7 @@ border-radius:50%;
 opacity:0.7;
 animation:sparkleUp 6s linear infinite;
 }
+
 @keyframes sparkleUp{
 from{transform:translateY(100vh);}
 to{transform:translateY(-10vh);}
@@ -185,13 +189,13 @@ body.golden #romanticPage{
 background:linear-gradient(-45deg,#ffd700,#ffb703,#ffdf00,#ffe066);
 }
 
-/* Hearts */
 .heart{
 position:fixed;
 top:-20px;
 font-size:20px;
 animation:fall linear forwards;
 }
+
 @keyframes fall{
 to{transform:translateY(110vh);opacity:0;}
 }
@@ -200,48 +204,43 @@ to{transform:translateY(110vh);opacity:0;}
 </head>
 <body>
 
-<!-- ---------- PAGE 1 ---------- -->
-<div id="deploymentPage">
-<div class="console-box">
-<div class="console-title">Production Deployment Console</div>
-
-<div class="status">
-✔ Build Version: 2.0.14<br>
-✔ Dependency Check: Passed<br>
-✔ Security Scan: Clean<br>
-✔ Performance Audit: Optimized<br>
-✔ Final Validation: Ready<br>
+<!-- PAGE 1 -->
+<div id="page1">
+<div class="dashboard">
+<h2>Release Management Dashboard</h2>
+<p>All modules compiled successfully.<br>
+Security audit passed.<br>
+Performance benchmark approved.</p>
+<button class="qc-btn" onclick="startQC()">Run Final QC Check</button>
+</div>
 </div>
 
-<div class="progress-container" id="progressContainer">
+<!-- PAGE 2 -->
+<div id="loadingPage">
+<div class="loader-box">
+<h3>Final QC Validation In Progress...</h3>
+<div class="progress-container">
 <div class="progress-bar" id="progressBar"></div>
 </div>
-<div class="progress-text" id="progressText"></div>
-
-<button class="deploy-btn" id="deployBtn" onclick="startDeployment()">Deploy to Production</button>
+<div class="loading-text" id="loadingText">Initializing tests...</div>
 </div>
 </div>
 
-<!-- ---------- PAGE 2 ---------- -->
+<!-- PAGE 3 -->
 <div id="romanticPage">
 <div class="moon"></div>
 
 <div class="card">
-
 <div style="font-size:60px;">💐</div>
-
 <div class="name">Heenu</div>
 <div class="subtitle">From a Swipe… to a Soul.</div>
 
 <div class="story">
 We met on a screen… just another swipe in the dark.<br><br>
-
 But something about you didn’t feel digital.<br>
 It felt destined.<br><br>
-
 From late night texts… to that voice note that stayed in my heart…<br>
 to tea shared between two strangers with hearts quietly racing…<br><br>
-
 Somewhere between pixels and presence… you became my peace.
 </div>
 
@@ -253,8 +252,6 @@ And if love is about choosing…<br><br>
 </div>
 
 <div id="finalMessage">
-That night when you trusted me with your silence…<br><br>
-I understood something.<br><br>
 Love isn’t loud.<br>
 It’s presence.<br>
 It’s care.<br>
@@ -268,33 +265,39 @@ And I would choose you — in every lifetime. ❤️
 
 <script>
 
-/* Deployment Progress */
-function startDeployment(){
-document.getElementById("deployBtn").disabled=true;
-document.getElementById("progressContainer").style.display="block";
+/* QC FLOW */
+function startQC(){
+document.getElementById("page1").style.display="none";
+document.getElementById("loadingPage").style.display="flex";
 
 let progress=0;
+const messages=[
+"Running regression suite...",
+"Validating UI flows...",
+"Checking emotional stability...",
+"Ensuring long-term compatibility...",
+"Finalizing eternal commitment..."
+];
+
+let msgIndex=0;
+
 let interval=setInterval(()=>{
-progress+=5;
+progress+=2;   // slower increment
 document.getElementById("progressBar").style.width=progress+"%";
-document.getElementById("progressText").innerText="Deploying... "+progress+"%";
+document.getElementById("loadingText").innerText=messages[Math.floor(progress/20)] || "Completing validation...";
 
 if(progress>=100){
 clearInterval(interval);
-document.getElementById("progressText").innerText="Deployment Successful ✓";
-setTimeout(launch,800);
+setTimeout(showRomantic,800);
 }
 },120);
 }
 
-function launch(){
-document.getElementById("deploymentPage").style.opacity="0";
-setTimeout(()=>{
-document.getElementById("deploymentPage").style.display="none";
+function showRomantic(){
+document.getElementById("loadingPage").style.display="none";
 document.getElementById("romanticPage").style.display="block";
 generateSparkles();
 window.scrollTo(0,0);
-},800);
 }
 
 /* Sparkles */
@@ -314,7 +317,7 @@ function propose(){
 document.getElementById("proposal").style.display="block";
 }
 
-/* YES button playful */
+/* Playful YES */
 const yesBtn=document.getElementById("yesBtn");
 let movable=true;
 
@@ -342,7 +345,6 @@ startForeverHearts();
 }
 });
 
-/* Infinite hearts */
 function startForeverHearts(){
 setInterval(()=>{
 const heart=document.createElement("div");
