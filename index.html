@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Platform Deployment Dashboard</title>
+<title>Project: Forever 1.0</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Great+Vibes&family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
 
@@ -11,6 +11,7 @@
 body{
 margin:0;
 font-family:'Inter',sans-serif;
+overflow-x:hidden;
 }
 
 /* ---------------- PAGE 1 ---------------- */
@@ -54,13 +55,12 @@ transition:0.3s;
 background:#1d4ed8;
 }
 
-/* ---------------- PAGE 2 LOADING ---------------- */
+/* ---------------- PAGE 2 ---------------- */
 #loadingPage{
 display:none;
 background:#0b1220;
 color:#cbd5e1;
 min-height:100vh;
-display:flex;
 justify-content:center;
 align-items:center;
 flex-direction:column;
@@ -69,6 +69,7 @@ flex-direction:column;
 .loader-box{
 width:90%;
 max-width:500px;
+text-align:center;
 }
 
 .progress-container{
@@ -93,7 +94,7 @@ font-size:14px;
 opacity:0.8;
 }
 
-/* ---------------- PAGE 3 ROMANTIC ---------------- */
+/* ---------------- PAGE 3 ---------------- */
 #romanticPage{
 display:none;
 min-height:100vh;
@@ -111,17 +112,6 @@ position:relative;
 100%{background-position:0% 50%}
 }
 
-.moon{
-position:absolute;
-top:60px;
-right:60px;
-width:120px;
-height:120px;
-background:radial-gradient(circle,#fff,#ddd 60%,transparent 70%);
-border-radius:50%;
-opacity:0.8;
-}
-
 .sparkle{
 position:absolute;
 width:3px;
@@ -130,6 +120,7 @@ background:white;
 border-radius:50%;
 opacity:0.7;
 animation:sparkleUp 6s linear infinite;
+pointer-events:none;
 }
 
 @keyframes sparkleUp{
@@ -139,13 +130,14 @@ to{transform:translateY(-10vh);}
 
 .card{
 margin:0 auto;
-background:rgba(20,10,40,0.78);
+background:rgba(20,10,40,0.82);
 backdrop-filter:blur(25px);
 padding:40px;
 border-radius:30px;
 max-width:700px;
 text-align:center;
 box-shadow:0 20px 80px rgba(0,0,0,0.6);
+transition:0.5s;
 }
 
 .name{
@@ -164,7 +156,7 @@ font-size:clamp(18px,3vw,24px);
 font-family:'Playfair Display',serif;
 line-height:1.8;
 font-size:16px;
-margin-bottom:30px;
+margin-bottom:25px;
 }
 
 button{
@@ -177,7 +169,6 @@ font-weight:600;
 margin:10px;
 font-size:16px;
 transition:0.3s;
-position:relative;
 }
 
 button:hover{transform:scale(1.05);}
@@ -189,75 +180,107 @@ body.golden #romanticPage{
 background:linear-gradient(-45deg,#ffd700,#ffb703,#ffdf00,#ffe066);
 }
 
+body.golden .card{
+box-shadow:0 0 80px rgba(255,215,0,0.7);
+transform:scale(1.02);
+}
+
 .heart{
 position:fixed;
 top:-20px;
 font-size:20px;
 animation:fall linear forwards;
+pointer-events:none;
 }
 
 @keyframes fall{
 to{transform:translateY(110vh);opacity:0;}
 }
-
 </style>
 </head>
+
 <body>
 
 <!-- PAGE 1 -->
 <div id="page1">
 <div class="dashboard">
-<h2>Release Management Dashboard</h2>
-<p>All modules compiled successfully.<br>
-Security audit passed.<br>
-Performance benchmark approved.</p>
-<button class="qc-btn" onclick="startQC()">Run Final QC Check</button>
+<h2>Project: Forever 1.0 – Production Deployment</h2>
+
+<p>
+<strong>Project Manager:</strong> Heenu<br>
+Stakeholder Approval: Pending ❤️<br>
+Risk Assessment: High (Heart Involved)<br>
+Projected ROI: Lifetime Happiness
+</p>
+
+<div style="margin-top:20px;font-size:14px;opacity:0.7;">
+Risk Register:<br>
+• Risk: Falling too deeply<br>
+• Impact: Permanent smile<br>
+• Mitigation Strategy: Hold her hand tighter
+</div>
+
+<button class="qc-btn" onclick="startQC()">Run Final Alignment Check</button>
 </div>
 </div>
 
 <!-- PAGE 2 -->
 <div id="loadingPage">
 <div class="loader-box">
-<h3>Final QC Validation In Progress...</h3>
+<h3>Final Alignment Validation In Progress...</h3>
 <div class="progress-container">
 <div class="progress-bar" id="progressBar"></div>
 </div>
-<div class="loading-text" id="loadingText">Initializing tests...</div>
+<div class="loading-text" id="loadingText">Initializing relationship audit...</div>
 </div>
 </div>
 
 <!-- PAGE 3 -->
 <div id="romanticPage">
-<div class="moon"></div>
-
 <div class="card">
+
 <div style="font-size:60px;">💐</div>
 <div class="name">Heenu</div>
-<div class="subtitle">From a Swipe… to a Soul.</div>
+<div class="subtitle">From a Swipe… to My Safest Place.</div>
 
 <div class="story">
-We met on a screen… just another swipe in the dark.<br><br>
-But something about you didn’t feel digital.<br>
-It felt destined.<br><br>
-From late night texts… to that voice note that stayed in my heart…<br>
-to tea shared between two strangers with hearts quietly racing…<br><br>
-Somewhere between pixels and presence… you became my peace.
+We started like most modern stories do — casually, digitally, almost accidentally.<br><br>
+
+But what followed wasn’t accidental at all.<br><br>
+
+It was clarity.<br>
+It was intention.<br>
+It was two adults choosing alignment over noise.<br><br>
+
+You don’t just manage projects.<br>
+You manage chaos with grace.<br>
+You create structure where others see confusion.<br><br>
+
+And somehow… you brought that same calm into my life.<br><br>
+
+Somewhere between planning sprints and planning weekends…<br>
+you became my constant.
 </div>
 
 <button onclick="propose()">Continue</button>
 
 <div id="proposal">
-And if love is about choosing…<br><br>
-<button id="yesBtn">I choose you</button>
+If love is about choosing…<br><br>
+<button id="yesBtn">Approve Forever ✔</button>
 </div>
 
 <div id="finalMessage">
-Love isn’t loud.<br>
-It’s presence.<br>
-It’s care.<br>
-It’s choosing someone gently.<br><br>
-You became my always.<br>
-And I would choose you — in every lifetime. ❤️
+You are not just my always.<br>
+You are my choice.<br>
+My calm.<br>
+My equal.<br><br>
+
+And if love is a long-term program…<br>
+I want to run it with you.<br><br>
+
+No sunset clause.<br>
+No exit strategy.<br>
+Just us. ❤️
 </div>
 
 </div>
@@ -271,20 +294,20 @@ document.getElementById("page1").style.display="none";
 document.getElementById("loadingPage").style.display="flex";
 
 let progress=0;
+
 const messages=[
-"Running regression suite...",
-"Validating UI flows...",
-"Checking emotional stability...",
-"Ensuring long-term compatibility...",
-"Finalizing eternal commitment..."
+"Reviewing relationship backlog...",
+"Aligning shared vision & OKRs...",
+"Mitigating ego-related risks...",
+"Securing long-term stakeholder buy-in...",
+"Preparing Lifetime Partnership Rollout..."
 ];
 
-let msgIndex=0;
-
 let interval=setInterval(()=>{
-progress+=2;   // slower increment
+progress+=2;
 document.getElementById("progressBar").style.width=progress+"%";
-document.getElementById("loadingText").innerText=messages[Math.floor(progress/20)] || "Completing validation...";
+document.getElementById("loadingText").innerText=
+messages[Math.floor(progress/20)] || "Completing validation...";
 
 if(progress>=100){
 clearInterval(interval);
@@ -317,44 +340,31 @@ function propose(){
 document.getElementById("proposal").style.display="block";
 }
 
-/* Playful YES */
+/* YES Button */
 const yesBtn=document.getElementById("yesBtn");
-let movable=true;
-
-function moveButton(){
-if(movable){
-yesBtn.style.position="absolute";
-yesBtn.style.left=Math.random()*60+"%";
-yesBtn.style.top=Math.random()*60+"%";
-}
-}
-
-yesBtn.addEventListener("mouseover",moveButton);
-yesBtn.addEventListener("touchstart",moveButton);
-
-setTimeout(()=>{
-movable=false;
-yesBtn.style.position="static";
-},7000);
 
 yesBtn.addEventListener("click",()=>{
-if(!movable){
 document.body.classList.add("golden");
 document.getElementById("finalMessage").style.display="block";
+yesBtn.innerText="Approved ✔";
 startForeverHearts();
-}
 });
 
+/* Hearts */
+let heartInterval;
+
 function startForeverHearts(){
-setInterval(()=>{
+heartInterval=setInterval(()=>{
 const heart=document.createElement("div");
 heart.className="heart";
-heart.innerHTML=Math.random()>0.3?"❤️":"💏";
+heart.innerHTML=Math.random()>0.3?"❤️":"💛";
 heart.style.left=Math.random()*100+"vw";
 heart.style.animationDuration=(2+Math.random()*3)+"s";
 document.body.appendChild(heart);
 setTimeout(()=>heart.remove(),5000);
 },250);
+
+setTimeout(()=>clearInterval(heartInterval),15000);
 }
 
 </script>
