@@ -34,10 +34,6 @@ box-shadow:0 0 40px rgba(0,0,0,0.6);
 text-align:center;
 }
 
-.dashboard h2{
-margin-bottom:20px;
-}
-
 .qc-btn{
 margin-top:25px;
 padding:12px 25px;
@@ -66,13 +62,9 @@ align-items:center;
 flex-direction:column;
 }
 
-.loader-box{
+.progress-container{
 width:90%;
 max-width:500px;
-}
-
-.progress-container{
-width:100%;
 height:12px;
 background:#1f2937;
 border-radius:8px;
@@ -110,17 +102,6 @@ overflow:hidden;
 0%{background-position:0% 50%}
 50%{background-position:100% 50%}
 100%{background-position:0% 50%}
-}
-
-.moon{
-position:absolute;
-top:60px;
-right:60px;
-width:120px;
-height:120px;
-background:radial-gradient(circle,#fff,#ddd 60%,transparent 70%);
-border-radius:50%;
-opacity:0.8;
 }
 
 .card{
@@ -164,16 +145,23 @@ font-weight:600;
 margin:10px;
 font-size:16px;
 transition:0.3s;
-position:relative;
 }
 
 button:hover{transform:scale(1.05);}
 
-#proposal{display:none;margin-top:20px;font-size:18px;}
-#finalMessage{display:none;font-size:20px;margin-top:30px;font-family:'Playfair Display',serif;line-height:1.8;}
+#proposal{
+display:none;
+margin-top:20px;
+font-size:18px;
+}
 
-body.golden #romanticPage{
-background:linear-gradient(-45deg,#ffd700,#ffb703,#ffdf00,#ffe066);
+#finalMessage{
+display:none;
+font-size:20px;
+margin-top:30px;
+font-family:'Playfair Display',serif;
+line-height:1.8;
+min-height:140px;
 }
 
 /* Multicolor Hearts */
@@ -206,19 +194,15 @@ Performance benchmark approved.</p>
 
 <!-- PAGE 2 -->
 <div id="loadingPage">
-<div class="loader-box">
 <h3>Final QC Validation In Progress...</h3>
 <div class="progress-container">
 <div class="progress-bar" id="progressBar"></div>
 </div>
-<div class="loading-text" id="loadingText">Initializing tests...</div>
-</div>
+<p id="loadingText">Initializing tests...</p>
 </div>
 
 <!-- PAGE 3 -->
 <div id="romanticPage">
-<div class="moon"></div>
-
 <div class="card">
 <div style="font-size:60px;">💐</div>
 <div class="name">Heenu</div>
@@ -230,17 +214,9 @@ Performance benchmark approved.</p>
 
 <div id="proposal">
 And if love is about choosing…<br><br>
-<button id="yesBtn">I choose you</button>
 </div>
 
-<div id="finalMessage">
-Love isn’t loud.<br>
-It’s presence.<br>
-It’s care.<br>
-It’s choosing someone gently.<br><br>
-You became my always.<br>
-And I would choose you — in every lifetime. ❤️
-</div>
+<div id="finalMessage"></div>
 
 </div>
 </div>
@@ -281,9 +257,8 @@ startTypewriter();
 startHeartRain();
 }
 
-/* TYPEWRITER */
-const romanticText = `
-We met on a screen… just another swipe in the dark.
+/* TYPEWRITER FIRST MESSAGE */
+const romanticText = `We met on a screen… just another swipe in the dark.
 
 But something about you didn’t feel digital.
 It felt destined.
@@ -293,25 +268,20 @@ to that voice note that stayed in my heart…
 to tea shared between two strangers with hearts quietly racing…
 
 Somewhere between pixels and presence…
-you became my peace.
-`;
+you became my peace.`;
 
 let charIndex = 0;
 
 function startTypewriter(){
 const element = document.getElementById("typedStory");
-
 let typingInterval = setInterval(()=>{
 if(charIndex < romanticText.length){
-
 let char = romanticText.charAt(charIndex);
-
 if(char === "\n"){
 element.innerHTML += "<br><br>";
 }else{
 element.innerHTML += char;
 }
-
 charIndex++;
 }else{
 clearInterval(typingInterval);
@@ -319,12 +289,44 @@ clearInterval(typingInterval);
 },40);
 }
 
+/* CONTINUE BUTTON */
+function propose(){
+document.getElementById("proposal").style.display="block";
+typeFinalMessage();
+}
+
+/* FINAL MESSAGE TYPEWRITER */
+const finalText = `Love isn’t loud.
+It’s presence.
+It’s care.
+It’s choosing someone gently.
+
+You became my always.
+And I would choose you — in every lifetime. ❤️`;
+
+function typeFinalMessage(){
+const element = document.getElementById("finalMessage");
+element.style.display="block";
+element.innerHTML="";
+let i=0;
+
+let interval=setInterval(()=>{
+if(i < finalText.length){
+let char = finalText.charAt(i);
+if(char === "\n"){
+element.innerHTML += "<br><br>";
+}else{
+element.innerHTML += char;
+}
+i++;
+}else{
+clearInterval(interval);
+}
+},40);
+}
+
 /* MULTICOLOR HEART RAIN */
-const heartColors=[
-"#ff4d6d","#ff85a1","#f72585",
-"#b5179e","#7209b7","#4361ee",
-"#4cc9f0","#ffd166","#ff006e"
-];
+const heartColors=["#ff4d6d","#ff85a1","#f72585","#b5179e","#7209b7","#4361ee","#4cc9f0","#ffd166","#ff006e"];
 
 function startHeartRain(){
 setInterval(()=>{
