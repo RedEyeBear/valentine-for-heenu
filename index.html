@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Heenu – A Timeless Evening</title>
+<title>Heenu – From Swipe to Soul</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;600&family=Inter:wght@300;400&display=swap" rel="stylesheet">
 
@@ -70,33 +70,40 @@ position:absolute;
 top:50%;
 left:50%;
 transform:translate(-50%,-50%);
-background:rgba(20,10,40,0.75);
+background:rgba(20,10,40,0.78);
 backdrop-filter:blur(25px);
 padding:40px;
 border-radius:30px;
 width:90%;
-max-width:600px;
+max-width:650px;
 text-align:center;
 box-shadow:0 20px 80px rgba(0,0,0,0.6);
 transition:transform 0.2s ease;
 }
 
-/* Subtle parallax hover */
 body:hover .card{
 transform:translate(-50%,-50%) scale(1.02);
 }
 
 .name{
 font-family:'Great Vibes',cursive;
-font-size:clamp(42px,6vw,70px);
+font-size:clamp(42px,6vw,72px);
 margin-bottom:10px;
 }
 
 .subtitle{
 font-family:'Playfair Display',serif;
 margin-bottom:20px;
-font-size:clamp(16px,3vw,22px);
-opacity:0.9;
+font-size:clamp(18px,3vw,24px);
+opacity:0.95;
+}
+
+.story{
+font-family:'Playfair Display',serif;
+line-height:1.8;
+font-size:16px;
+opacity:0.95;
+margin-bottom:25px;
 }
 
 button{
@@ -115,7 +122,7 @@ position:relative;
 button:hover{transform:scale(1.05);}
 
 #proposal{display:none;margin-top:20px;font-size:18px;}
-#finalMessage{display:none;font-size:22px;margin-top:20px;font-family:'Playfair Display',serif;}
+#finalMessage{display:none;font-size:20px;margin-top:20px;font-family:'Playfair Display',serif;line-height:1.8;}
 
 /* 💛 Golden YES transformation */
 body.golden{
@@ -166,7 +173,25 @@ button{font-size:14px;}
 <div style="font-size:60px;">💐</div>
 
 <div class="name">Heenu</div>
-<div class="subtitle">A Love That Feels Remembered</div>
+
+<div class="subtitle">From a Swipe… to a Soul.</div>
+
+<div class="story">
+We met on a screen… just another swipe in the dark.<br><br>
+
+But something about you didn’t feel digital.<br>
+It felt destined.<br><br>
+
+From late night texts…<br>
+to that voice note that stayed in my heart…<br>
+to tea shared between two strangers<br>
+with hearts quietly racing…<br><br>
+
+From the hug I almost gave,<br>
+to the night you trusted me with your quiet,<br>
+somewhere between pixels and presence…<br>
+you became my peace.
+</div>
 
 <button onclick="propose()">Walk Every Lifetime With Me</button>
 
@@ -176,14 +201,30 @@ Will you walk every lifetime with me? ❤️<br><br>
 </div>
 
 <div id="finalMessage">
-You are my always, in every universe. ❤️
+That night…<br><br>
+
+When you laid your head on my lap<br>
+and trusted me with your silence,<br>
+I understood something.<br><br>
+
+Love isn’t fireworks.<br>
+It’s presence.<br>
+It’s care.<br>
+It’s choosing someone gently.<br><br>
+
+From swipe to soul…<br>
+you didn’t just enter my life.<br>
+You became my always.<br><br>
+
+I would choose you —<br>
+in every lifetime. ❤️
 </div>
 
 </div>
 
 <script>
 
-/* ✨ Sparkles */
+/* Sparkles */
 for(let i=0;i<60;i++){
 let s=document.createElement("div");
 s.className="sparkle";
@@ -192,13 +233,13 @@ s.style.animationDuration=(4+Math.random()*4)+"s";
 document.body.appendChild(s);
 }
 
-/* Show proposal */
+/* Proposal */
 function propose(){
 document.getElementById("proposal").style.display="block";
 document.getElementById("chime").play();
 }
 
-/* 💘 Escaping YES button (desktop + mobile) */
+/* Escaping YES button */
 const yesBtn=document.getElementById("yesBtn");
 let movable=true;
 
@@ -214,7 +255,6 @@ leaveHeart();
 yesBtn.addEventListener("mouseover",moveButton);
 yesBtn.addEventListener("touchstart",moveButton);
 
-/* Stop movement after 7 seconds */
 setTimeout(()=>{
 movable=false;
 yesBtn.style.position="static";
@@ -230,7 +270,7 @@ document.body.appendChild(h);
 setTimeout(()=>h.remove(),3000);
 }
 
-/* 💛 Click YES */
+/* YES Click */
 yesBtn.addEventListener("click",()=>{
 if(!movable){
 document.body.classList.add("golden");
@@ -240,7 +280,7 @@ startForeverHearts();
 }
 });
 
-/* ❤️ Infinite heart rain */
+/* Infinite heart rain */
 function startForeverHearts(){
 setInterval(()=>{
 const heart=document.createElement("div");
