@@ -46,7 +46,7 @@ width:120px;
 height:120px;
 background:radial-gradient(circle,#fff,#ddd 60%,transparent 70%);
 border-radius:50%;
-opacity:0.7;
+opacity:0.8;
 }
 
 /* ✨ Sparkles */
@@ -56,6 +56,7 @@ width:3px;
 height:3px;
 background:white;
 border-radius:50%;
+opacity:0.7;
 animation:sparkleUp 6s linear infinite;
 }
 @keyframes sparkleUp{
@@ -80,14 +81,14 @@ box-shadow:0 20px 80px rgba(0,0,0,0.6);
 transition:transform 0.2s ease;
 }
 
-/* subtle parallax */
+/* Subtle parallax hover */
 body:hover .card{
 transform:translate(-50%,-50%) scale(1.02);
 }
 
 .name{
 font-family:'Great Vibes',cursive;
-font-size:clamp(40px,6vw,68px);
+font-size:clamp(42px,6vw,70px);
 margin-bottom:10px;
 }
 
@@ -95,6 +96,7 @@ margin-bottom:10px;
 font-family:'Playfair Display',serif;
 margin-bottom:20px;
 font-size:clamp(16px,3vw,22px);
+opacity:0.9;
 }
 
 button{
@@ -115,12 +117,12 @@ button:hover{transform:scale(1.05);}
 #proposal{display:none;margin-top:20px;font-size:18px;}
 #finalMessage{display:none;font-size:22px;margin-top:20px;font-family:'Playfair Display',serif;}
 
-/* 💛 Golden YES */
+/* 💛 Golden YES transformation */
 body.golden{
 background:linear-gradient(-45deg,#ffd700,#ffb703,#ffdf00,#ffe066);
 }
 
-/* ❤️ Hearts */
+/* ❤️ Falling hearts */
 .heart{
 position:fixed;
 top:-20px;
@@ -131,7 +133,7 @@ animation:fall linear forwards;
 to{transform:translateY(110vh);opacity:0;}
 }
 
-/* 📱 Mobile spacing */
+/* 📱 Mobile */
 @media(max-width:480px){
 .card{padding:30px;}
 button{font-size:14px;}
@@ -166,8 +168,6 @@ button{font-size:14px;}
 <div class="name">Heenu</div>
 <div class="subtitle">A Love That Feels Remembered</div>
 
-<p>Press and hold anywhere for 2 seconds…</p>
-
 <button onclick="propose()">Walk Every Lifetime With Me</button>
 
 <div id="proposal">
@@ -183,7 +183,7 @@ You are my always, in every universe. ❤️
 
 <script>
 
-/* Sparkles */
+/* ✨ Sparkles */
 for(let i=0;i<60;i++){
 let s=document.createElement("div");
 s.className="sparkle";
@@ -192,13 +192,13 @@ s.style.animationDuration=(4+Math.random()*4)+"s";
 document.body.appendChild(s);
 }
 
-/* Proposal */
+/* Show proposal */
 function propose(){
 document.getElementById("proposal").style.display="block";
 document.getElementById("chime").play();
 }
 
-/* YES button movement (mobile compatible) */
+/* 💘 Escaping YES button (desktop + mobile) */
 const yesBtn=document.getElementById("yesBtn");
 let movable=true;
 
@@ -214,7 +214,7 @@ leaveHeart();
 yesBtn.addEventListener("mouseover",moveButton);
 yesBtn.addEventListener("touchstart",moveButton);
 
-/* Stop moving after 7 seconds */
+/* Stop movement after 7 seconds */
 setTimeout(()=>{
 movable=false;
 yesBtn.style.position="static";
@@ -230,17 +230,17 @@ document.body.appendChild(h);
 setTimeout(()=>h.remove(),3000);
 }
 
-/* Click YES */
+/* 💛 Click YES */
 yesBtn.addEventListener("click",()=>{
 if(!movable){
 document.body.classList.add("golden");
 document.getElementById("romanticSwell").play();
-startForeverHearts();
 document.getElementById("finalMessage").style.display="block";
+startForeverHearts();
 }
 });
 
-/* Infinite heart rain */
+/* ❤️ Infinite heart rain */
 function startForeverHearts(){
 setInterval(()=>{
 const heart=document.createElement("div");
@@ -252,20 +252,6 @@ document.body.appendChild(heart);
 setTimeout(()=>heart.remove(),5000);
 },250);
 }
-
-/* Press & Hold (mobile friendly) */
-let holdTimer;
-function startHold(){
-holdTimer=setTimeout(()=>{
-alert("Memory 1: The First Conversation\nMemory 2: The Moment We Knew\nMemory 3: The Future We Choose ❤️");
-},2000);
-}
-function endHold(){clearTimeout(holdTimer);}
-
-document.body.addEventListener("mousedown",startHold);
-document.body.addEventListener("mouseup",endHold);
-document.body.addEventListener("touchstart",startHold);
-document.body.addEventListener("touchend",endHold);
 
 </script>
 
