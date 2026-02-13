@@ -204,3 +204,194 @@ to{transform:translateY(110vh);opacity:0;}
 </head>
 
 <body>
+
+<!-- PAGE 1 -->
+<div id="page1">
+<div class="dashboard">
+<h2>Project: Forever 1.0 – Production Deployment</h2>
+
+<p>
+<strong>Project Manager:</strong> Heenu<br>
+Stakeholder Approval: Pending ❤️<br>
+Risk Assessment: High (Heart Involved)<br>
+Projected ROI: Lifetime Happiness
+</p>
+
+<div style="margin-top:20px;font-size:14px;opacity:0.7;">
+Risk Register:<br>
+• Risk: Falling too deeply<br>
+• Impact: Permanent smile<br>
+• Mitigation Strategy: Hold her hand tighter
+</div>
+
+<button class="qc-btn" onclick="startQC()">Run Final Alignment Check</button>
+</div>
+</div>
+
+<!-- PAGE 2 -->
+<div id="loadingPage">
+<div class="loader-box">
+<h3>Final Alignment Validation In Progress...</h3>
+<div class="progress-container">
+<div class="progress-bar" id="progressBar"></div>
+</div>
+<div class="loading-text" id="loadingText">Initializing relationship audit...</div>
+</div>
+</div>
+
+<!-- PAGE 3 -->
+<div id="romanticPage">
+<div class="card">
+
+<div style="font-size:60px;">💐</div>
+<div class="name">Heenu</div>
+
+<div class="story" id="storyText"></div>
+
+<button onclick="propose()">Continue</button>
+
+<div id="proposal">
+If love is about choosing…<br><br>
+<button id="yesBtn">Approve Forever ✔</button>
+</div>
+
+<div id="finalMessage"></div>
+
+</div>
+</div>
+
+<script>
+
+/* QC FLOW */
+function startQC(){
+document.getElementById("page1").style.display="none";
+document.getElementById("loadingPage").style.display="flex";
+
+let progress=0;
+
+const messages=[
+"Reviewing relationship backlog...",
+"Aligning shared vision & OKRs...",
+"Mitigating ego-related risks...",
+"Securing long-term stakeholder buy-in...",
+"Preparing Lifetime Partnership Rollout..."
+];
+
+let interval=setInterval(()=>{
+progress+=2;
+document.getElementById("progressBar").style.width=progress+"%";
+document.getElementById("loadingText").innerText=
+messages[Math.floor(progress/20)] || "Completing validation...";
+
+if(progress>=100){
+clearInterval(interval);
+setTimeout(showRomantic,800);
+}
+},120);
+}
+
+function showRomantic(){
+document.getElementById("loadingPage").style.display="none";
+document.getElementById("romanticPage").style.display="block";
+generateSparkles();
+window.scrollTo(0,0);
+startTypingStory();
+}
+
+/* Typewriter Effect */
+function typeWriter(element, text, speed, callback){
+let i = 0;
+function typing(){
+if(i < text.length){
+element.innerHTML += text.charAt(i);
+i++;
+setTimeout(typing, speed);
+} else if(callback){
+callback();
+}
+}
+typing();
+}
+
+function startTypingStory(){
+const storyContent = `We started like most modern stories do — casually, digitally, almost accidentally.
+
+But what followed wasn’t accidental at all.
+
+It was clarity.
+It was intention.
+It was two adults choosing alignment over noise.
+
+You don’t just manage projects.
+You manage chaos with grace.
+You create structure where others see confusion.
+
+And somehow… you brought that same calm into my life.
+
+Somewhere between planning sprints and planning weekends…
+you became my constant.`;
+
+typeWriter(document.getElementById("storyText"), storyContent, 35);
+}
+
+/* Sparkles */
+function generateSparkles(){
+for(let i=0;i<60;i++){
+let s=document.createElement("div");
+s.className="sparkle";
+s.style.left=Math.random()*100+"vw";
+s.style.top=Math.random()*100+"vh";
+s.style.animationDuration=(4+Math.random()*4)+"s";
+document.getElementById("romanticPage").appendChild(s);
+}
+}
+
+/* Proposal */
+function propose(){
+document.getElementById("proposal").style.display="block";
+}
+
+/* YES Button */
+const yesBtn=document.getElementById("yesBtn");
+
+yesBtn.addEventListener("click",()=>{
+document.body.classList.add("golden");
+const finalText = `You are not just my always.
+You are my choice.
+My calm.
+My equal.
+
+And if love is a long-term program…
+I want to run it with you.
+
+No sunset clause.
+No exit strategy.
+Just us. ❤️`;
+
+typeWriter(document.getElementById("finalMessage"), finalText, 40);
+document.getElementById("finalMessage").style.display="block";
+yesBtn.innerText="Approved ✔";
+startForeverHearts();
+});
+
+/* Hearts */
+let heartInterval;
+
+function startForeverHearts(){
+heartInterval=setInterval(()=>{
+const heart=document.createElement("div");
+heart.className="heart";
+heart.innerHTML=Math.random()>0.3?"❤️":"💛";
+heart.style.left=Math.random()*100+"vw";
+heart.style.animationDuration=(2+Math.random()*3)+"s";
+document.body.appendChild(heart);
+setTimeout(()=>heart.remove(),5000);
+},250);
+
+setTimeout(()=>clearInterval(heartInterval),15000);
+}
+
+</script>
+
+</body>
+</html>
