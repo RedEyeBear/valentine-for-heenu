@@ -3,218 +3,231 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>From Swipe to Soul – Director's Cut</title>
+<title>Heenu – A Timeless Evening</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;600&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;600&family=Inter:wght@300;400&display=swap" rel="stylesheet">
 
 <style>
-
-:root{
---accent:#e8c07d;
---dark:#0e0f14;
-}
-
-*{margin:0;padding:0;box-sizing:border-box;}
-
 body{
-font-family:'Inter',sans-serif;
-background:var(--dark);
-color:white;
+margin:0;
 overflow:hidden;
+font-family:'Inter',sans-serif;
+background:linear-gradient(120deg,#ffe6eb,#fcd5ce,#f8edeb,#fde2e4);
+background-size:400% 400%;
+animation:watercolor 25s ease infinite;
+color:#5c3a4d;
+transition:background 2s ease;
+}
+@keyframes watercolor{
+0%{background-position:0% 50%}
+50%{background-position:100% 50%}
+100%{background-position:0% 50%}
 }
 
-/* Cinematic Letterbox */
-
-.letterbox{
+/* Vignette */
+body::after{
+content:"";
 position:fixed;
 width:100%;
-height:10vh;
-background:black;
-z-index:100;
-transition:2s;
+height:100%;
+pointer-events:none;
+box-shadow:inset 0 0 120px rgba(0,0,0,0.15);
 }
 
-.top{top:0;}
-.bottom{bottom:0;}
+/* Golden state */
+body.golden{
+background:linear-gradient(120deg,#fff3b0,#ffe08a,#ffd166,#ffb703);
+}
 
-/* Background */
-
-.bg{
+/* Sparkles */
+.sparkle{
 position:fixed;
-width:100%;
-height:100vh;
-background:url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?q=80&w=2070&auto=format&fit=crop') center/cover no-repeat;
-transition:5s ease;
+width:4px;
+height:4px;
+background:white;
+border-radius:50%;
+opacity:0.6;
+animation:sparkle 6s linear infinite;
+}
+@keyframes sparkle{
+from{transform:translateY(100vh);}
+to{transform:translateY(-10vh);}
 }
 
-.bg.night{
-filter:brightness(0.3) saturate(0.6);
-}
-
-/* Center Content */
-
-.center{
+/* Card */
+.card{
 position:absolute;
 top:50%;
 left:50%;
 transform:translate(-50%,-50%);
+background:rgba(255,255,255,0.8);
+backdrop-filter:blur(25px);
+padding:60px;
+border-radius:40px;
+width:650px;
 text-align:center;
-max-width:800px;
-width:90%;
+box-shadow:0 30px 80px rgba(0,0,0,0.08);
+transition:transform 0.1s ease;
 }
 
-/* Titles */
-
-h1{
-font-family:'Playfair Display',serif;
-font-size:clamp(32px,6vw,64px);
-margin-bottom:20px;
+/* Parallax effect */
+body:hover .card{
+transform:translate(-50%,-50%) scale(1.01);
 }
 
-.final{
-display:none;
+.name{
 font-family:'Great Vibes',cursive;
-font-size:48px;
-margin-top:30px;
-color:var(--accent);
-animation:glow 2s infinite alternate;
+font-size:64px;
+margin-bottom:10px;
 }
 
-@keyframes glow{
-from{text-shadow:0 0 10px rgba(232,192,125,0.4);}
-to{text-shadow:0 0 40px rgba(232,192,125,0.9);}
+.subtitle{
+font-family:'Playfair Display',serif;
+margin-bottom:25px;
 }
 
-/* Tea */
-
-.teacup{
-font-size:70px;
+button{
+padding:14px 30px;
+border-radius:30px;
+border:none;
+background:linear-gradient(45deg,#ffb6c1,#ffc3a0);
+cursor:pointer;
+font-weight:600;
+margin:10px;
+transition:0.3s;
 position:relative;
-margin-top:30px;
 }
 
-.steam{
-position:absolute;
-top:-30px;
-left:50%;
-width:12px;
-height:30px;
-background:rgba(255,255,255,0.7);
-border-radius:50%;
-filter:blur(8px);
-transform:translateX(-50%);
-animation:steam 3s infinite;
-}
+button:hover{transform:scale(1.05);}
 
-@keyframes steam{
-0%{opacity:0;transform:translate(-50%,10px);}
-50%{opacity:1;}
-100%{opacity:0;transform:translate(-50%,-40px);}
-}
+#proposal{display:none;margin-top:25px;font-size:22px;}
+#finalMessage{display:none;font-size:28px;margin-top:30px;font-family:'Playfair Display',serif;}
 
-/* Stars */
-
-.star{
+.heart{
 position:fixed;
-width:3px;
-height:3px;
-background:white;
-border-radius:50%;
-opacity:0;
-animation:twinkle 3s infinite alternate;
+top:-20px;
+font-size:22px;
+animation:fall linear forwards;
 }
-
-@keyframes twinkle{
-from{opacity:0.2;}
-to{opacity:1;}
+@keyframes fall{
+to{transform:translateY(110vh);opacity:0;}
 }
-
 </style>
 </head>
+
 <body>
 
-<div class="letterbox top"></div>
-<div class="letterbox bottom"></div>
-
-<div class="bg" id="bg"></div>
-
-<audio id="music">
-<source src="https://cdn.pixabay.com/download/audio/2023/03/07/audio_7baf8c9d4a.mp3?filename=romantic-orchestra-141568.mp3">
+<!-- Audio -->
+<audio autoplay loop>
+<source src="https://cdn.pixabay.com/download/audio/2022/05/16/audio_1e0b3e04e4.mp3?filename=coffee-shop-ambience-112191.mp3">
 </audio>
 
-<div class="center">
+<audio id="chime">
+<source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_9a46c4d3a7.mp3?filename=wind-chime-110955.mp3">
+</audio>
 
-<h1 id="title">From Swipe to Soul</h1>
-<p>Tap anywhere to begin the story.</p>
+<audio id="romanticSwell">
+<source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_5b6f2eaa3f.mp3?filename=romantic-piano-110964.mp3">
+</audio>
 
-<div class="teacup">☕<div class="steam" id="steam"></div></div>
+<div class="card">
 
-<div class="final" id="final">
-Heenu ❤️<br>
-Some stories don’t restart…<br>
-They resume.<br><br>
-Happy Valentine’s Day.
+<div style="font-size:60px;">💐</div>
+
+<div class="name">Heenu</div>
+<div class="subtitle">A Love That Feels Remembered</div>
+
+<p>Press and hold anywhere for 2 seconds…</p>
+
+<button onclick="propose()">Walk Every Lifetime With Me</button>
+
+<div id="proposal">
+Will you walk every lifetime with me? ❤️<br><br>
+<button id="yesBtn">Yes</button>
+</div>
+
+<div id="finalMessage">
+You are my always, in every universe. ❤️
 </div>
 
 </div>
 
 <script>
 
-const bg=document.getElementById("bg");
-const music=document.getElementById("music");
-const steam=document.getElementById("steam");
-
-let started=false;
-
-document.body.addEventListener("click",()=>{
-if(started) return;
-started=true;
-
-music.play();
-
-/* Timed transitions */
-setTimeout(()=>{
-bg.classList.add("night");
-createStars();
-},8000);
-
-setTimeout(()=>{
-document.getElementById("final").style.display="block";
-},15000);
-});
-
-/* Interactive steam */
-document.addEventListener("mousemove",e=>{
-let x=(e.clientX/window.innerWidth-0.5)*20;
-steam.style.transform=`translate(${x}px,-40px)`;
-});
-
-/* Mobile gesture */
-document.addEventListener("touchmove",e=>{
-let touch=e.touches[0];
-let x=(touch.clientX/window.innerWidth-0.5)*20;
-steam.style.transform=`translate(${x}px,-40px)`;
-});
-
-/* Star constellation shaped like lily */
-function createStars(){
-const positions=[
-[50,20],[45,25],[55,25],
-[40,35],[60,35],
-[45,45],[55,45],
-[50,55]
-];
-
-positions.forEach(pos=>{
-let star=document.createElement("div");
-star.className="star";
-star.style.left=pos[0]+"vw";
-star.style.top=pos[1]+"vh";
-star.style.animationDuration=(2+Math.random()*2)+"s";
-star.style.opacity=1;
-document.body.appendChild(star);
-});
+/* Sparkles */
+for(let i=0;i<40;i++){
+let s=document.createElement("div");
+s.className="sparkle";
+s.style.left=Math.random()*100+"vw";
+s.style.animationDuration=(4+Math.random()*4)+"s";
+document.body.appendChild(s);
 }
+
+/* Proposal */
+function propose(){
+document.getElementById("proposal").style.display="block";
+document.getElementById("chime").play();
+}
+
+/* Moving YES button */
+const yesBtn=document.getElementById("yesBtn");
+let movable=true;
+
+yesBtn.addEventListener("mouseover",()=>{
+if(movable){
+yesBtn.style.position="absolute";
+yesBtn.style.left=Math.random()*80+"%";
+yesBtn.style.top=Math.random()*80+"%";
+leaveHeart();
+}
+});
+
+setTimeout(()=>{
+movable=false;
+yesBtn.style.position="static";
+},7000);
+
+function leaveHeart(){
+const h=document.createElement("div");
+h.className="heart";
+h.innerHTML="❤️";
+h.style.left=Math.random()*100+"vw";
+h.style.animationDuration="3s";
+document.body.appendChild(h);
+setTimeout(()=>h.remove(),3000);
+}
+
+/* Click YES */
+yesBtn.addEventListener("click",()=>{
+if(!movable){
+document.body.classList.add("golden");
+document.getElementById("romanticSwell").play();
+rainKisses();
+document.getElementById("finalMessage").style.display="block";
+}
+});
+
+/* Kissing emoji rain */
+function rainhearts(){
+for(let i=0;i<120;i++){
+const k=document.createElement("div");
+k.className="heart";
+k.innerHTML="💏";
+k.style.left=Math.random()*100+"vw";
+k.style.animationDuration=(2+Math.random()*3)+"s";
+document.body.appendChild(k);
+setTimeout(()=>k.remove(),5000);
+}
+}
+
+/* Hidden press & hold slideshow */
+let holdTimer;
+document.body.addEventListener("mousedown",()=>{
+holdTimer=setTimeout(()=>{
+alert("Memory 1: The First Conversation\nMemory 2: The Moment We Knew\nMemory 3: The Future We Choose ❤️");
+},2000);
+});
+document.body.addEventListener("mouseup",()=>clearTimeout(holdTimer));
 
 </script>
 
