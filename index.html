@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Platform Deployment Dashboard</title>
+<title>Platform QC Dashboard</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Great+Vibes&family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
 
@@ -34,10 +34,6 @@ box-shadow:0 0 40px rgba(0,0,0,0.6);
 text-align:center;
 }
 
-.dashboard h2{
-margin-bottom:20px;
-}
-
 .qc-btn{
 margin-top:25px;
 padding:12px 25px;
@@ -47,11 +43,6 @@ color:white;
 border-radius:6px;
 cursor:pointer;
 font-weight:600;
-transition:0.3s;
-}
-
-.qc-btn:hover{
-background:#1d4ed8;
 }
 
 /* ---------------- PAGE 2 LOADING ---------------- */
@@ -66,13 +57,9 @@ align-items:center;
 flex-direction:column;
 }
 
-.loader-box{
+.progress-container{
 width:90%;
 max-width:500px;
-}
-
-.progress-container{
-width:100%;
 height:12px;
 background:#1f2937;
 border-radius:8px;
@@ -87,12 +74,6 @@ background:#22c55e;
 transition:width 0.4s ease;
 }
 
-.loading-text{
-margin-top:15px;
-font-size:14px;
-opacity:0.8;
-}
-
 /* ---------------- PAGE 3 ROMANTIC ---------------- */
 #romanticPage{
 display:none;
@@ -103,6 +84,7 @@ animation:gradientMove 18s ease infinite;
 color:#fff;
 padding:60px 20px;
 position:relative;
+overflow:hidden;
 }
 
 @keyframes gradientMove{
@@ -111,35 +93,9 @@ position:relative;
 100%{background-position:0% 50%}
 }
 
-.moon{
-position:absolute;
-top:60px;
-right:60px;
-width:120px;
-height:120px;
-background:radial-gradient(circle,#fff,#ddd 60%,transparent 70%);
-border-radius:50%;
-opacity:0.8;
-}
-
-.sparkle{
-position:absolute;
-width:3px;
-height:3px;
-background:white;
-border-radius:50%;
-opacity:0.7;
-animation:sparkleUp 6s linear infinite;
-}
-
-@keyframes sparkleUp{
-from{transform:translateY(100vh);}
-to{transform:translateY(-10vh);}
-}
-
 .card{
 margin:0 auto;
-background:rgba(20,10,40,0.78);
+background:rgba(20,10,40,0.8);
 backdrop-filter:blur(25px);
 padding:40px;
 border-radius:30px;
@@ -151,49 +107,32 @@ box-shadow:0 20px 80px rgba(0,0,0,0.6);
 .name{
 font-family:'Great Vibes',cursive;
 font-size:clamp(42px,6vw,72px);
-margin-bottom:10px;
-}
-
-.subtitle{
-font-family:'Playfair Display',serif;
 margin-bottom:20px;
-font-size:clamp(18px,3vw,24px);
 }
 
 .story{
 font-family:'Playfair Display',serif;
 line-height:1.8;
-font-size:16px;
-margin-bottom:30px;
+font-size:18px;
+min-height:150px;
 }
 
-button{
-padding:12px 24px;
-border-radius:30px;
-border:none;
-background:linear-gradient(45deg,#ff9a9e,#fbc2eb);
-cursor:pointer;
-font-weight:600;
-margin:10px;
-font-size:16px;
-transition:0.3s;
-position:relative;
+.fadeButton{
+opacity:0;
+transition:opacity 1.5s ease;
+margin-top:30px;
 }
 
-button:hover{transform:scale(1.05);}
-
-#proposal{display:none;margin-top:20px;font-size:18px;}
-#finalMessage{display:none;font-size:20px;margin-top:30px;font-family:'Playfair Display',serif;line-height:1.8;}
-
-body.golden #romanticPage{
-background:linear-gradient(-45deg,#ffd700,#ffb703,#ffdf00,#ffe066);
+.fadeButton.visible{
+opacity:1;
 }
 
 .heart{
 position:fixed;
 top:-20px;
-font-size:20px;
-animation:fall linear forwards;
+font-size:18px;
+animation:fall 4s linear forwards;
+opacity:0.8;
 }
 
 @keyframes fall{
@@ -208,84 +147,45 @@ to{transform:translateY(110vh);opacity:0;}
 <div id="page1">
 <div class="dashboard">
 <h2>Release Management Dashboard</h2>
-<p>All modules compiled successfully.<br>
-Security audit passed.<br>
-Performance benchmark approved.</p>
+<p>All systems operational.<br>Performance stable.<br>Security verified.</p>
 <button class="qc-btn" onclick="startQC()">Run Final QC Check</button>
 </div>
 </div>
 
 <!-- PAGE 2 -->
 <div id="loadingPage">
-<div class="loader-box">
 <h3>Final QC Validation In Progress...</h3>
 <div class="progress-container">
 <div class="progress-bar" id="progressBar"></div>
 </div>
-<div class="loading-text" id="loadingText">Initializing tests...</div>
-</div>
+<p id="loadingText">Initializing tests...</p>
 </div>
 
 <!-- PAGE 3 -->
 <div id="romanticPage">
-<div class="moon"></div>
-
 <div class="card">
-<div style="font-size:60px;">💐</div>
 <div class="name">Heenu</div>
-<div class="subtitle">From a Swipe… to a Soul.</div>
+<div class="story" id="typedText"></div>
 
-<div class="story">
-We met on a screen… just another swipe in the dark.<br><br>
-But something about you didn’t feel digital.<br>
-It felt destined.<br><br>
-From late night texts… to that voice note that stayed in my heart…<br>
-to tea shared between two strangers with hearts quietly racing…<br><br>
-Somewhere between pixels and presence… you became my peace.
+<div class="fadeButton" id="continueBtn">
+<button onclick="showFinal()">Continue</button>
 </div>
 
-<button onclick="propose()">Continue</button>
-
-<div id="proposal">
-And if love is about choosing…<br><br>
-<button id="yesBtn">I choose you</button>
-</div>
-
-<div id="finalMessage">
-Love isn’t loud.<br>
-It’s presence.<br>
-It’s care.<br>
-It’s choosing someone gently.<br><br>
-You became my always.<br>
-And I would choose you — in every lifetime. ❤️
-</div>
-
+<div class="story" id="finalMessage" style="display:none;"></div>
 </div>
 </div>
 
 <script>
 
-/* QC FLOW */
+/* ---------------- QC FLOW ---------------- */
 function startQC(){
 document.getElementById("page1").style.display="none";
 document.getElementById("loadingPage").style.display="flex";
 
 let progress=0;
-const messages=[
-"Running regression suite...",
-"Validating UI flows...",
-"Checking emotional stability...",
-"Ensuring long-term compatibility...",
-"Finalizing eternal commitment..."
-];
-
-let msgIndex=0;
-
 let interval=setInterval(()=>{
-progress+=2;   // slower increment
+progress+=2;
 document.getElementById("progressBar").style.width=progress+"%";
-document.getElementById("loadingText").innerText=messages[Math.floor(progress/20)] || "Completing validation...";
-
 if(progress>=100){
 clearInterval(interval);
 setTimeout(showRomantic,800);
@@ -296,64 +196,62 @@ setTimeout(showRomantic,800);
 function showRomantic(){
 document.getElementById("loadingPage").style.display="none";
 document.getElementById("romanticPage").style.display="block";
-generateSparkles();
-window.scrollTo(0,0);
+startTyping();
 }
 
-/* Sparkles */
-function generateSparkles(){
-for(let i=0;i<60;i++){
-let s=document.createElement("div");
-s.className="sparkle";
-s.style.left=Math.random()*100+"vw";
-s.style.top=Math.random()*100+"vh";
-s.style.animationDuration=(4+Math.random()*4)+"s";
-document.getElementById("romanticPage").appendChild(s);
-}
-}
+/* ---------------- TYPEWRITER ---------------- */
+const text = `We met on a screen, just another swipe in the dark. 
+But something about you didn’t feel digital. 
+It felt destined. 
+From late night texts to tea shared between strangers, 
+somewhere between pixels and presence, 
+you became my peace.`;
 
-/* Proposal */
-function propose(){
-document.getElementById("proposal").style.display="block";
-}
+let words = text.split(" ");
+let index = 0;
 
-/* Playful YES */
-const yesBtn=document.getElementById("yesBtn");
-let movable=true;
-
-function moveButton(){
-if(movable){
-yesBtn.style.position="absolute";
-yesBtn.style.left=Math.random()*60+"%";
-yesBtn.style.top=Math.random()*60+"%";
+function startTyping(){
+let interval = setInterval(()=>{
+if(index < words.length){
+document.getElementById("typedText").innerHTML += words[index] + " ";
+dropHeart();
+index++;
+}else{
+clearInterval(interval);
+document.getElementById("continueBtn").classList.add("visible");
 }
+},250);
 }
 
-yesBtn.addEventListener("mouseover",moveButton);
-yesBtn.addEventListener("touchstart",moveButton);
-
-setTimeout(()=>{
-movable=false;
-yesBtn.style.position="static";
-},7000);
-
-yesBtn.addEventListener("click",()=>{
-if(!movable){
-document.body.classList.add("golden");
-document.getElementById("finalMessage").style.display="block";
-startForeverHearts();
-}
-});
-
-function startForeverHearts(){
-setInterval(()=>{
+function dropHeart(){
 const heart=document.createElement("div");
 heart.className="heart";
-heart.innerHTML=Math.random()>0.3?"❤️":"💏";
+heart.innerHTML="❤️";
 heart.style.left=Math.random()*100+"vw";
-heart.style.animationDuration=(2+Math.random()*3)+"s";
 document.body.appendChild(heart);
-setTimeout(()=>heart.remove(),5000);
+setTimeout(()=>heart.remove(),4000);
+}
+
+/* ---------------- FINAL MESSAGE ---------------- */
+function showFinal(){
+document.getElementById("continueBtn").style.display="none";
+const finalText = `Love isn’t loud. It’s presence. It’s care. 
+It’s choosing someone gently. 
+You became my always. 
+And I would choose you, in every lifetime. ❤️`;
+
+let words = finalText.split(" ");
+let i=0;
+document.getElementById("finalMessage").style.display="block";
+
+let interval=setInterval(()=>{
+if(i<words.length){
+document.getElementById("finalMessage").innerHTML+=words[i]+" ";
+dropHeart();
+i++;
+}else{
+clearInterval(interval);
+}
 },250);
 }
 
