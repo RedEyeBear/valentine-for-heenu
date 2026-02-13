@@ -161,7 +161,7 @@ font-size:20px;
 margin-top:30px;
 font-family:'Playfair Display',serif;
 line-height:1.8;
-min-height:140px;
+min-height:160px;
 }
 
 /* Multicolor Hearts */
@@ -257,7 +257,7 @@ startTypewriter();
 startHeartRain();
 }
 
-/* TYPEWRITER FIRST MESSAGE */
+/* FIRST MESSAGE TYPEWRITER */
 const romanticText = `We met on a screen… just another swipe in the dark.
 
 But something about you didn’t feel digital.
@@ -289,20 +289,34 @@ clearInterval(typingInterval);
 },40);
 }
 
-/* CONTINUE BUTTON */
+/* CONTINUE */
 function propose(){
 document.getElementById("proposal").style.display="block";
 typeFinalMessage();
 }
 
-/* FINAL MESSAGE TYPEWRITER */
-const finalText = `Love isn’t loud.
-It’s presence.
-It’s care.
-It’s choosing someone gently.
+/* FINAL PROMISE TYPEWRITER */
+const finalText = `I don’t promise a perfect life.
 
-You became my always.
-And I would choose you — in every lifetime. ❤️`;
+I promise a present one.
+A patient one.
+A faithful one.
+
+I promise to stand beside you
+when the days are light
+and when they are heavy.
+
+I promise to listen,
+to grow,
+to choose you —
+not once,
+but every single day.
+
+In this lifetime,
+and in every lifetime after it.
+
+You are my forever.
+And I am yours. ❤️`;
 
 function typeFinalMessage(){
 const element = document.getElementById("finalMessage");
