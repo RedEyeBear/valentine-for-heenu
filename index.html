@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Forever 2.0 – Executive Release</title>
+<title>Project: Forever 1.0</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Great+Vibes&family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
 
@@ -12,12 +12,12 @@ body{
 margin:0;
 font-family:'Inter',sans-serif;
 overflow-x:hidden;
-background:#0f172a;
-color:#e2e8f0;
 }
 
-/* PAGE 1 */
+/* ---------------- PAGE 1 ---------------- */
 #page1{
+background:#0f172a;
+color:#e2e8f0;
 min-height:100vh;
 display:flex;
 justify-content:center;
@@ -28,11 +28,15 @@ padding:20px;
 .dashboard{
 background:#111827;
 padding:40px;
-border-radius:16px;
+border-radius:12px;
 width:100%;
 max-width:650px;
 box-shadow:0 0 40px rgba(0,0,0,0.6);
 text-align:center;
+}
+
+.dashboard h2{
+margin-bottom:20px;
 }
 
 .qc-btn{
@@ -41,7 +45,7 @@ padding:12px 25px;
 background:#2563eb;
 border:none;
 color:white;
-border-radius:8px;
+border-radius:6px;
 cursor:pointer;
 font-weight:600;
 transition:0.3s;
@@ -51,26 +55,25 @@ transition:0.3s;
 background:#1d4ed8;
 }
 
-/* Countdown */
-#countdown{
-margin-top:20px;
-font-size:14px;
-opacity:0.8;
-}
-
-/* PAGE 2 */
+/* ---------------- PAGE 2 ---------------- */
 #loadingPage{
 display:none;
+background:#0b1220;
+color:#cbd5e1;
 min-height:100vh;
 justify-content:center;
 align-items:center;
 flex-direction:column;
-background:#0b1220;
+}
+
+.loader-box{
+width:90%;
+max-width:500px;
+text-align:center;
 }
 
 .progress-container{
-width:90%;
-max-width:500px;
+width:100%;
 height:12px;
 background:#1f2937;
 border-radius:8px;
@@ -91,22 +94,38 @@ font-size:14px;
 opacity:0.8;
 }
 
-/* PAGE 3 */
+/* ---------------- PAGE 3 ---------------- */
 #romanticPage{
 display:none;
 min-height:100vh;
 background:linear-gradient(-45deg,#3a0ca3,#4361ee,#7209b7,#f9c74f);
 background-size:400% 400%;
 animation:gradientMove 18s ease infinite;
+color:#fff;
 padding:60px 20px;
 position:relative;
-color:white;
 }
 
 @keyframes gradientMove{
 0%{background-position:0% 50%}
 50%{background-position:100% 50%}
 100%{background-position:0% 50%}
+}
+
+.sparkle{
+position:absolute;
+width:3px;
+height:3px;
+background:white;
+border-radius:50%;
+opacity:0.7;
+animation:sparkleUp 6s linear infinite;
+pointer-events:none;
+}
+
+@keyframes sparkleUp{
+from{transform:translateY(100vh);}
+to{transform:translateY(-10vh);}
 }
 
 .card{
@@ -124,13 +143,7 @@ transition:0.5s;
 .name{
 font-family:'Great Vibes',cursive;
 font-size:clamp(42px,6vw,72px);
-margin-bottom:10px;
-}
-
-.subtitle{
-font-family:'Playfair Display',serif;
 margin-bottom:20px;
-font-size:clamp(18px,3vw,24px);
 }
 
 .story{
@@ -138,6 +151,8 @@ font-family:'Playfair Display',serif;
 line-height:1.8;
 font-size:16px;
 margin-bottom:25px;
+white-space:pre-line;
+min-height:220px;
 }
 
 button{
@@ -155,7 +170,15 @@ transition:0.3s;
 button:hover{transform:scale(1.05);}
 
 #proposal{display:none;margin-top:20px;font-size:18px;}
-#finalMessage{display:none;font-size:20px;margin-top:30px;font-family:'Playfair Display',serif;line-height:1.8;}
+#finalMessage{
+display:none;
+font-size:20px;
+margin-top:30px;
+font-family:'Playfair Display',serif;
+line-height:1.8;
+white-space:pre-line;
+min-height:150px;
+}
 
 body.golden #romanticPage{
 background:linear-gradient(-45deg,#ffd700,#ffb703,#ffdf00,#ffe066);
@@ -177,199 +200,7 @@ pointer-events:none;
 @keyframes fall{
 to{transform:translateY(110vh);opacity:0;}
 }
-
-/* Easter Egg */
-#easterEgg{
-display:none;
-position:fixed;
-bottom:20px;
-right:20px;
-background:#111;
-color:#fff;
-padding:15px 20px;
-border-radius:10px;
-box-shadow:0 0 20px rgba(255,255,255,0.2);
-font-size:14px;
-}
-
 </style>
 </head>
 
 <body>
-
-<!-- PAGE 1 -->
-<div id="page1">
-<div class="dashboard">
-<h2>Project: Forever 2.0 – Executive Deployment</h2>
-
-<p>
-<strong>Project Manager:</strong> Heenu<br>
-Stakeholder Approval: Pending ❤️<br>
-Projected ROI: Lifetime Alignment
-</p>
-
-<div id="countdown"></div>
-
-<button class="qc-btn" onclick="startQC()">Run Final Alignment Check</button>
-</div>
-</div>
-
-<!-- PAGE 2 -->
-<div id="loadingPage">
-<h3>Aligning Hearts & Roadmaps...</h3>
-<div class="progress-container">
-<div class="progress-bar" id="progressBar"></div>
-</div>
-<div class="loading-text" id="loadingText">Initializing emotional audit...</div>
-</div>
-
-<!-- PAGE 3 -->
-<div id="romanticPage">
-<div class="card">
-
-<div style="font-size:60px;">💐</div>
-<div class="name" id="typedName"></div>
-<div class="subtitle">From a Swipe… to My Safest Place.</div>
-
-<div class="story">
-We didn’t just meet.<br><br>
-We aligned.<br><br>
-Two adults choosing intention over impulse.<br>
-Clarity over confusion.<br><br>
-You lead teams with strength and grace.<br>
-And somehow… you brought that same calm into my life.<br><br>
-If love is a long-term strategy,<br>
-I want to build it with you.
-</div>
-
-<button onclick="propose()">Continue</button>
-
-<div id="proposal">
-If love is about choosing…<br><br>
-<button id="yesBtn">Approve Forever ✔</button>
-</div>
-
-<div id="finalMessage">
-No sunset clause.<br>
-No exit strategy.<br><br>
-Just us. ❤️
-</div>
-
-</div>
-</div>
-
-<div id="easterEgg">Secret unlocked: Our first chai date > Any roadmap meeting ☕😉</div>
-
-<audio id="bgMusic" loop>
-<source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_5b9c0a4f2e.mp3?filename=romantic-ambient-110397.mp3" type="audio/mp3">
-</audio>
-
-<script>
-
-/* COUNTDOWN */
-function updateCountdown(){
-const now=new Date();
-const valentine=new Date(now.getFullYear(),1,14,0,0,0);
-if(now>valentine) valentine.setFullYear(valentine.getFullYear()+1);
-const diff=valentine-now;
-
-const days=Math.floor(diff/(1000*60*60*24));
-const hours=Math.floor((diff/(1000*60*60))%24);
-const minutes=Math.floor((diff/(1000*60))%60);
-
-document.getElementById("countdown").innerText=
-`Countdown to Valentine’s Midnight: ${days}d ${hours}h ${minutes}m`;
-}
-setInterval(updateCountdown,1000);
-updateCountdown();
-
-/* QC FLOW */
-function startQC(){
-document.getElementById("page1").style.display="none";
-document.getElementById("loadingPage").style.display="flex";
-document.getElementById("bgMusic").play();
-
-let progress=0;
-const messages=[
-"Reviewing relationship backlog...",
-"Aligning shared vision & OKRs...",
-"Mitigating ego-related risks...",
-"Securing long-term stakeholder buy-in...",
-"Preparing Lifetime Partnership Rollout..."
-];
-
-let interval=setInterval(()=>{
-progress+=2;
-document.getElementById("progressBar").style.width=progress+"%";
-document.getElementById("loadingText").innerText=
-messages[Math.floor(progress/20)] || "Finalizing...";
-
-if(progress>=100){
-clearInterval(interval);
-setTimeout(showRomantic,800);
-}
-},120);
-}
-
-function showRomantic(){
-document.getElementById("loadingPage").style.display="none";
-document.getElementById("romanticPage").style.display="block";
-typeName("Heenu");
-}
-
-/* TYPEWRITER */
-function typeName(name){
-let i=0;
-let speed=120;
-function typing(){
-if(i<name.length){
-document.getElementById("typedName").innerHTML+=name.charAt(i);
-i++;
-setTimeout(typing,speed);
-}
-}
-typing();
-}
-
-/* Proposal */
-function propose(){
-document.getElementById("proposal").style.display="block";
-}
-
-document.getElementById("yesBtn").addEventListener("click",()=>{
-document.body.classList.add("golden");
-document.getElementById("finalMessage").style.display="block";
-startHearts();
-});
-
-/* Hearts */
-let heartInterval;
-function startHearts(){
-heartInterval=setInterval(()=>{
-const heart=document.createElement("div");
-heart.className="heart";
-heart.innerHTML="❤️";
-heart.style.left=Math.random()*100+"vw";
-heart.style.animationDuration=(2+Math.random()*3)+"s";
-document.body.appendChild(heart);
-setTimeout(()=>heart.remove(),5000);
-},250);
-
-setTimeout(()=>clearInterval(heartInterval),15000);
-}
-
-/* Easter Egg (type 'chai') */
-let secret="";
-document.addEventListener("keydown",(e)=>{
-secret+=e.key.toLowerCase();
-if(secret.includes("chai")){
-document.getElementById("easterEgg").style.display="block";
-setTimeout(()=>document.getElementById("easterEgg").style.display="none",4000);
-secret="";
-}
-});
-
-</script>
-
-</body>
-</html>
